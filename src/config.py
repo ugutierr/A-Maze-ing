@@ -3,6 +3,9 @@ import os
 from pydantic import BaseModel, ValidationError
 from typing import Annotated, Any
 
+class ConfigError(Exception):
+    pass
+
 class AlgorithmType(str, Enum):
     
 
@@ -28,29 +31,22 @@ class Config(BaseModel):
         return value
 
 
-def main() -> None:
+def get_config() -> Config:
     config_keys = ["WIDTH", "HEIGHT", "ENTRY", "EXIT", "OUTPUT_FILE", "PERFECT",
     "SEED", "ALGORITHM", "DISPLAY_MODE"]
     config_dic = {}
     load_dotenv("config.txt")
     for key in config_keys:
-        config[key.lower()] = os.getenv(key)
-        if not config[key]:
-            config[key] = os.getenv(key.lower())
+        config_dic[key.lower()] = os.getenv(key)
+        if not config_dic[key]:
+            config_dic[key] = os.getenv(key.lower())
     try:
         config = Config(config_dic)
     except ValidationError as e:
+        msg = 
         for error in e.errors():
             print("Error in configuration field:", error["loc"][0])
             print(error["msg"])
 
 
 
-
-if __name__ == "__main__":
-    try:
-        main()
-    except KeyboardInterrupt:
-        print("\n\nProcess interrupted\n Exiting...")
-    except Exception:
-        print("Unknown error")
