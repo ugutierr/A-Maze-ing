@@ -1,3 +1,5 @@
+from config import get_config
+from pydantic import ValidationError
 
 
 def main() -> int:
@@ -16,7 +18,5 @@ def main() -> int:
         return 1
 
 
-
 if __name__ == "__main__":
-    raise SystemExit(main()))
-
+    raise SystemExit(main())
