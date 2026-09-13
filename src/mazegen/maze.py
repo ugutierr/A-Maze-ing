@@ -1,6 +1,3 @@
-from mazegen.config import Config
-
-
 class Cell:
     def __init__(self, row: int, column: int) -> None:
         self.row = row
@@ -17,11 +14,17 @@ class Cell:
 
 
 class Maze:
-    def __init__(self, config: Config) -> None:
-        self.width = config.width
-        self.height = config.height
-        self.entry = config.entry
-        self.exit = config.exit
+    def __init__(
+        self,
+        width: int,
+        height: int,
+        entry: tuple[int, int],
+        exit: tuple[int, int],
+    ) -> None:
+        self.width = width
+        self.height = height
+        self.entry = entry
+        self.exit = exit
         self.grid = [
             [Cell(row, col) for col in range(self.width)]
             for row in range(self.height)

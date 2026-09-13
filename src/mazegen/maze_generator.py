@@ -1,13 +1,15 @@
 from mazegen.maze import Maze
-from mazegen.config import Config, AlgorithmType
+from mazegen.config import AlgorithmType
 import random
 
 
 class MazeGenerator:
-    def __init__(self, config: Config) -> None:
-        self.seed = config.seed
-        self.perfect = config.perfect
-        self.algorithm = config.algorithm
+    def __init__(
+        self, seed: None | str, perfect: bool, algorithm: None | AlgorithmType
+    ) -> None:
+        self.seed = seed
+        self.perfect = perfect
+        self.algorithm = algorithm
 
     def generate(self, maze: Maze) -> None:
         random.seed(self.seed)
