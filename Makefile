@@ -14,7 +14,7 @@ intall:
 	uv sync
 
 run: install
-	uv run python3 src/main.py
+	uv run python3 src/a_maze_ing.py
 
 debug:
 

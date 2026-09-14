@@ -1,6 +1,11 @@
 from mazegen.maze import Maze
-from mazegen.config import AlgorithmType
 import random
+from enum import Enum
+
+
+class AlgorithmType(str, Enum):
+    DFS = "DFS"
+    PRIM = "PRIM"
 
 
 class MazeGenerator:
@@ -42,6 +47,9 @@ class MazeGenerator:
                 next.visited = True
                 maze.remove_wall(stack[-1], next)
                 stack.append(next)
+        for row in maze.grid:
+            for cell in row:
+                cell.visited = False
 
     def prim_generator(self, maze: Maze) -> None:
         start = random.choice(random.choice(maze.grid))

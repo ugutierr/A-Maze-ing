@@ -1,28 +1,23 @@
 from dotenv import load_dotenv
 import os
-from pydantic import BaseModel, field_validator
-from typing import Annotated, Any
+from pydantic import BaseModel, field_validator, Field, model_validator
+from typing import Annotated, Any, Self
 from enum import Enum
-
-
-class ConfigError(Exception):
-    pass
-
-
-class AlgorithmType(str, Enum):
-    DFS = "DFS"
-    PRIM = "PRIM"
+from mazegen import AlgorithmType
 
 
 class DisplayModeType(str, Enum):
     pass
 
 
+NonNegativeInt = Annotated[int, Field(ge=0)]
+
+
 class Config(BaseModel):
-    width: Annotated[int]  # falta maximo/minimo de width
-    height: Annotated[int]
-    entry: tuple[int, int]
-    exit: tuple[int, int]
+    width: Annotated[int, Field(ge=1, le=1000)]  # falta maximo/minimo de width
+    height: Annotated[int, Field(ge=1, le=1000)]
+    entry: tuple[NonNegativeInt, NonNegativeInt]
+    exit: tuple[NonNegativeInt, NonNegativeInt]
     output_file: str
     perfect: bool
     seed: None | str
@@ -43,6 +38,21 @@ class Config(BaseModel):
             return value.upper()
         return value
 
+    @model_validator(mode="after")
+    def check_endpoints(self) -> Self:
+        if self.entry == self.exit:
+            raise ValueError("Entry and exit cannot be the same cell")
+        for cell in (self.entry, self.exit):
+            if cell[0] >= self.width or cell[1] >= self.height:
+                raise ValueError(
+                    "Entry"
+                    if cell == self.entry
+                    else "Exit"
+                    + " must have x and y coordinates"
+                    + " less than width and height respectively"
+                )
+        return self
+
 
 def get_config() -> Config:
     config_keys = [
@@ -57,10 +67,10 @@ def get_config() -> Config:
         "DISPLAY_MODE",
     ]
     config_dic: dict[Any, Any] = {}
-    load_dotenv("config.txt")
+    load_dotenv("config.example.txt")
     for key in config_keys:
         config_dic[key.lower()] = os.getenv(key)
-        if not config_dic[key]:
-            config_dic[key] = os.getenv(key.lower())
+        if not config_dic[key.lower()]:
+            config_dic[key.lower()] = os.getenv(key.lower())
     config = Config(**config_dic)
     return config

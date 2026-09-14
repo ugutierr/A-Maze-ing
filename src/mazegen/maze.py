@@ -1,3 +1,9 @@
+import logging
+from collections import deque
+
+logger = logging.getLogger(__name__)
+
+
 class Cell:
     def __init__(self, row: int, column: int) -> None:
         self.row = row
@@ -10,7 +16,7 @@ class Cell:
         self.logo42 = False
 
     def get_bit(self) -> int:
-        return self.north * 8 + self.east * 4 + self.south * 2 + self.west
+        return self.north * 1 + self.east * 2 + self.south * 4 + self.west * 8
 
 
 class Maze:
@@ -29,6 +35,8 @@ class Maze:
             [Cell(row, col) for col in range(self.width)]
             for row in range(self.height)
         ]
+        self.entry_cell = self.grid[self.entry[1]][self.entry[0]]
+        self.exit_cell = self.grid[self.exit[1]][self.exit[0]]
 
     def get_bitmap(self) -> str:
         return "\n".join(
@@ -37,6 +45,39 @@ class Maze:
                 for row in self.grid
             ]
         )
+
+    def shortest_path(self) -> str:
+        for row in self.grid:  # habria que replantearlo
+            for cell in row:
+                cell.visited = False
+        parent: dict[Cell, None | tuple[Cell, int]] = {self.entry_cell: None}
+        self.entry_cell.visited = True
+
+        queue = deque([self.entry_cell])
+        while queue:
+            prev = queue.popleft()
+            if prev == self.exit_cell:
+                break
+            for i, cell in enumerate(self.neighbors(prev)):
+                if cell.visited or prev.get_bit() & (1 << i):
+                    continue
+                parent[cell] = (prev, i)
+                cell.visited = True
+                queue.append(cell)
+        if not self.exit_cell.visited:
+            logger.debug("Shortest path not found")
+            return ""
+        current = self.exit_cell
+        path = []
+        while current is not self.entry_cell:
+            prev, direction = parent[current]
+            path.append(["N", "E", "S", "W"][direction])
+            current = prev
+        for row in self.grid:
+            for cell in row:
+                cell.visited = False
+
+        return "".join(reversed(path))
 
     def north_cell(self, cell: Cell) -> Cell | None:
         if cell.row == 0:
