@@ -18,11 +18,10 @@ def gen_output_file(name: str, maze: Maze) -> None:
             + str(maze.entry[0])
             + ","
             + str(maze.entry[1])
-            + "\t\t# entry\t(x,y)\n"
+            + "\n"
             + str(maze.exit[0])
             + ","
             + str(maze.exit[1])
-            + "\t\t# exit\t(x,y)\n"
             + "\n"
             + maze.shortest_path()
             + "\n"

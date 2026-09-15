@@ -59,7 +59,7 @@ class Maze:
             if prev == self.exit_cell:
                 break
             for i, cell in enumerate(self.neighbors(prev)):
-                if cell.visited or prev.get_bit() & (1 << i):
+                if cell is None or cell.visited or prev.get_bit() & (1 << i):
                     continue
                 parent[cell] = (prev, i)
                 cell.visited = True
@@ -99,14 +99,13 @@ class Maze:
             return None
         return self.grid[cell.row][cell.column + 1]
 
-    def neighbors(self, cell: Cell) -> list[Cell]:
-        nbrs = [
+    def neighbors(self, cell: Cell) -> list[Cell | None]:
+        return [
             self.north_cell(cell),
             self.east_cell(cell),
             self.south_cell(cell),
             self.west_cell(cell),
         ]
-        return [cell for cell in nbrs if cell is not None]
 
     def remove_wall(self, cell1: Cell, cell2: Cell) -> None:
         if cell2 == self.north_cell(cell1):

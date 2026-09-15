@@ -38,7 +38,7 @@ class MazeGenerator:
             nbrs = [
                 cell
                 for cell in maze.neighbors(stack[-1])
-                if not cell.visited and not cell.logo42
+                if cell is not None and not cell.visited and not cell.logo42
             ]
             if not nbrs:
                 stack.pop()
@@ -57,13 +57,17 @@ class MazeGenerator:
         stack = [
             (cell, start)
             for cell in maze.neighbors(start)
-            if not cell.visited and not cell.logo42
+            if cell is not None and not cell.visited and not cell.logo42
         ]
         while stack:
             next = random.choice(stack)
             next[0].visited = True
             maze.remove_wall(*next)
-            stack += [(cell, next[0]) for cell in maze.neighbors(next[0])]
+            stack += [
+                (cell, next[0])
+                for cell in maze.neighbors(next[0])
+                if cell is not None
+            ]
             stack = [
                 tup
                 for tup in stack
