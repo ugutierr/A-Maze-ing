@@ -2,6 +2,7 @@ from config import get_config
 from pydantic import ValidationError
 from mazegen import Maze, MazeGenerator
 import logging
+import sys
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -57,15 +58,17 @@ def main() -> int:
         logger.error("Invalid configuration:")
         for error in e.errors():
             logger.error(f"  {error['loc'][0]}: {error['msg']}")
-    except KeyboardInterrupt:
-        logger.info("Process interrupted")
-    except Exception as e:
-        logger.error(f"Unexpected error: {e}")
-        logger.exception(f"Unexpected error: {e}")
     else:
         return 0
     return 1
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    try:
+        sys.exit(main())
+    except KeyboardInterrupt:
+        logger.info("Process interrupted")
+        sys.exit(130)
+    except Exception as e:
+        logger.error(f"Unexpected error: {e}")
+        sys.exit(2)

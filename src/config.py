@@ -14,8 +14,8 @@ NonNegativeInt = Annotated[int, Field(ge=0)]
 
 
 class Config(BaseModel):
-    width: Annotated[int, Field(ge=1, le=1000)]  # falta maximo/minimo de width
-    height: Annotated[int, Field(ge=1, le=1000)]
+    width: Annotated[int, Field(ge=13, le=1000)]
+    height: Annotated[int, Field(ge=9, le=1000)]
     entry: tuple[NonNegativeInt, NonNegativeInt]
     exit: tuple[NonNegativeInt, NonNegativeInt]
     output_file: str
@@ -37,6 +37,23 @@ class Config(BaseModel):
         if isinstance(value, str):
             return value.upper()
         return value
+
+    @model_validator(mode="after")
+    def check_algorithm(self) -> Self:
+        if self.perfect and self.algorithm == AlgorithmType.PACMAN:
+            raise ValueError(
+                "Incompatible requirements, PACMAN like and pefect maze"
+            )
+        if not self.perfect and (
+            self.algorithm == AlgorithmType.DFS
+            or self.algorithm == AlgorithmType.PRIM
+        ):
+            raise ValueError(
+                "Incompatible requirements, " + "DFS"
+                if self.algorithm == AlgorithmType.DFS
+                else "PRIM" + "and not a perfect maze"
+            )
+        return self
 
     @model_validator(mode="after")
     def check_endpoints(self) -> Self:

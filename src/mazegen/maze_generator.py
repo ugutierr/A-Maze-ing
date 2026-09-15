@@ -1,4 +1,4 @@
-from mazegen.maze import Maze
+from mazegen.maze import Maze, Cell
 import random
 from enum import Enum
 
@@ -6,6 +6,7 @@ from enum import Enum
 class AlgorithmType(str, Enum):
     DFS = "DFS"
     PRIM = "PRIM"
+    PACMAN = "PACMAN"
 
 
 class MazeGenerator:
@@ -30,6 +31,10 @@ class MazeGenerator:
                 AlgorithmType.PRIM,
             ):
                 self._prim_generator(maze)
+            case (False, None | AlgorithmType.PACMAN):
+                self._pacman_generator(maze)
+            case _:
+                raise ValueError("Could no determine generator algorithm")
 
     def _gen_42logo(self, maze: Maze) -> None:
         x, y = maze.width // 2, maze.height // 2
@@ -104,3 +109,46 @@ class MazeGenerator:
         for row in maze.grid:
             for cell in row:
                 cell.visited = False
+
+    def _pacman_generator(self, maze: Maze) -> None:
+        self._dfs_generator(maze)
+        x = maze.width // 2
+        y = maze.height // 2
+        mandatory_corridors: list[tuple[Cell, Cell]] = [
+            (maze.grid[0][0], maze.grid[0][1]),
+            (maze.grid[0][0], maze.grid[1][0]),
+            (maze.grid[maze.height - 1][0], maze.grid[maze.height - 2][0]),
+            (maze.grid[maze.height - 1][0], maze.grid[maze.height - 1][1]),
+            (
+                maze.grid[maze.height - 1][maze.width - 1],
+                maze.grid[maze.height - 2][maze.width - 1],
+            ),
+            (
+                maze.grid[maze.height - 1][maze.width - 1],
+                maze.grid[maze.height - 1][maze.width - 2],
+            ),
+            (maze.grid[0][maze.width - 1], maze.grid[0][maze.width - 2]),
+            (maze.grid[0][maze.width - 1], maze.grid[1][maze.width - 1]),
+            (maze.grid[y][x], maze.grid[y + 1][x]),
+            (maze.grid[y][x], maze.grid[y - 1][x]),
+        ]
+        for cell1, cell2 in mandatory_corridors:
+            maze.remove_wall(cell1, cell2)
+        dead_ends = [
+            cell
+            for row in maze.grid
+            for cell in row
+            if not cell.logo42 and cell.degree() == 1
+        ]
+        while dead_ends:
+            dead_end = random.choice(dead_ends)
+            nbrs = [
+                cell
+                for i, cell in enumerate(maze.neighbors(dead_end))
+                if cell is not None
+                and not cell.logo42
+                and dead_end.get_bit() & 1 << i
+            ]
+            if nbrs:
+                maze.remove_wall(dead_end, random.choice(nbrs))
+            dead_ends.remove(dead_end)

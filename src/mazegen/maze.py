@@ -18,6 +18,10 @@ class Cell:
     def get_bit(self) -> int:
         return self.north * 1 + self.east * 2 + self.south * 4 + self.west * 8
 
+    def degree(self) -> int:
+        bit = self.get_bit()
+        return 4 - sum((bit >> i) & 1 for i in range(4))
+
 
 class Maze:
     def __init__(
