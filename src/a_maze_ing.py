@@ -3,12 +3,38 @@ from pydantic import ValidationError
 from mazegen import Maze, MazeGenerator
 import logging
 import sys
+from pathlib import Path
 
-logging.basicConfig(
-    level=logging.DEBUG,
-    format="%(levelname)s: %(message)s | %(filename)s:%(lineno)d",
+Path("logs").mkdir(exist_ok=True)
+
+
+class NoTracebackFilter(logging.Filter):
+    def filter(self, record: logging.LogRecord) -> bool:
+        record.exc_info = None
+        record.exc_text = None
+        return True
+
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+
+# Terminal
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.DEBUG)
+console_handler.setFormatter(logging.Formatter("%(levelname)s: %(message)s"))
+console_handler.addFilter(NoTracebackFilter())
+
+# File
+file_handler = logging.FileHandler("logs/maze.log")
+file_handler.setLevel(logging.DEBUG)
+file_handler.setFormatter(
+    logging.Formatter(
+        "%(asctime)s | %(levelname)s: %(message)s | %(filename)s:%(lineno)d"
+    )
 )
-logger = logging.getLogger(__name__)  # cambiar anter de entregar
+
+logger.addHandler(console_handler)
+logger.addHandler(file_handler)
 
 
 def gen_output_file(name: str, maze: Maze) -> None:
@@ -45,19 +71,19 @@ def main() -> int:
         gen_output_file(config.output_file, maze)
 
     except PermissionError:
-        logger.error(
+        logger.exception(
             f"Permission denied to create or modify {config.output_file}"
         )
     except FileNotFoundError:
-        logger.error(f"Could not find {config.output_file}")
+        logger.exception(f"Could not find {config.output_file}")
     except IsADirectoryError:
-        logger.error(config.output_file, "is a directory")
+        logger.exception(config.output_file, "is a directory")
     except OSError as e:
-        logger.error(f"Error openning file {e}")
+        logger.exception(f"Error openning file {e}")
     except ValidationError as e:
-        logger.error("Invalid configuration:")
+        logger.exception("Invalid configuration:")
         for error in e.errors():
-            logger.error(f"  {error['loc'][0]}: {error['msg']}")
+            logger.exception(f"  {error['loc'][0]}: {error['msg']}")
     else:
         return 0
     return 1
@@ -70,5 +96,5 @@ if __name__ == "__main__":
         logger.info("Process interrupted")
         sys.exit(130)
     except Exception as e:
-        logger.error(f"Unexpected error: {e}")
+        logger.exception(f"Unexpected error: {e}")
         sys.exit(2)
