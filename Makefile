@@ -21,6 +21,7 @@ debug:
 clean:
 	find . -type d -name "__pycache__" -not -path "./.venv/*"\
 	-prune -exec rm -rf {} +
+	rm -rf maze.txt
 
 lint: install
 	uv run flake8 .
@@ -31,4 +32,8 @@ lint-strict: install
 	uv run flake8 .
 	uv run mypy . --strict
 
-.PHONY: install run debug lint lint-strict
+
+test: run
+	python3 tests/maze_analyzer.py maze.txt 
+
+.PHONY: install run debug lint lint-strict run
