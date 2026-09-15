@@ -47,10 +47,7 @@ class Maze:
         )
 
     def shortest_path(self) -> str:
-        for row in self.grid:  # habria que replantearlo
-            for cell in row:
-                cell.visited = False
-        parent: dict[Cell, None | tuple[Cell, int]] = {self.entry_cell: None}
+        parent: dict[Cell, tuple[Cell, int]] = {}
         self.entry_cell.visited = True
 
         queue = deque([self.entry_cell])
@@ -58,12 +55,12 @@ class Maze:
             prev = queue.popleft()
             if prev == self.exit_cell:
                 break
-            for i, cell in enumerate(self.neighbors(prev)):
-                if cell is None or cell.visited or prev.get_bit() & (1 << i):
+            for i, c in enumerate(self.neighbors(prev)):
+                if c is None or c.visited or prev.get_bit() & (1 << i):
                     continue
-                parent[cell] = (prev, i)
-                cell.visited = True
-                queue.append(cell)
+                parent[c] = (prev, i)
+                c.visited = True
+                queue.append(c)
         if not self.exit_cell.visited:
             logger.debug("Shortest path not found")
             return ""

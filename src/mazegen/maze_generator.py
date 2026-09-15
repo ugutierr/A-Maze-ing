@@ -18,19 +18,47 @@ class MazeGenerator:
 
     def generate(self, maze: Maze) -> None:
         random.seed(self.seed)
+        self._gen_42logo(maze)
         match (self.perfect, self.algorithm):
             case (True, None | AlgorithmType.DFS) | (
                 None,
                 AlgorithmType.DFS,
             ):
-                self.dfs_generator(maze)
+                self._dfs_generator(maze)
             case (True, AlgorithmType.PRIM) | (
                 None,
                 AlgorithmType.PRIM,
             ):
-                self.prim_generator(maze)
+                self._prim_generator(maze)
 
-    def dfs_generator(self, maze: Maze) -> None:
+    def _gen_42logo(self, maze: Maze) -> None:
+        x, y = maze.width // 2, maze.height // 2
+        logo4 = [
+            (x - 1, y),
+            (x - 2, y),
+            (x - 3, y),
+            (x + 3, y + 1),
+            (x + 3, y + 2),
+            (x + 1, y - 1),
+            (x + 1, y - 2),
+        ]
+        logo2 = [
+            (x + 3, y),
+            (x + 2, y),
+            (x + 1, y),
+            (x + 3, y + 2),
+            (x + 2, y + 2),
+            (x + 1, y + 2),
+            (x + 3, y - 2),
+            (x + 2, y - 2),
+            (x + 1, y - 2),
+            (x + 1, y - 1),
+            (x + 3, y + 1),
+        ]
+        for i, j in logo4 + logo2:
+            maze.grid[j][i]
+
+    def _dfs_generator(self, maze: Maze) -> None:
         start = random.choice(random.choice(maze.grid))
         start.visited = True
         stack = [start]
@@ -51,7 +79,7 @@ class MazeGenerator:
             for cell in row:
                 cell.visited = False
 
-    def prim_generator(self, maze: Maze) -> None:
+    def _prim_generator(self, maze: Maze) -> None:
         start = random.choice(random.choice(maze.grid))
         start.visited = True
         stack = [
@@ -73,3 +101,6 @@ class MazeGenerator:
                 for tup in stack
                 if not tup[0].visited and not tup[0].logo42
             ]
+        for row in maze.grid:
+            for cell in row:
+                cell.visited = False
