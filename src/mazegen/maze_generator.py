@@ -56,7 +56,7 @@ class MazeGenerator:
             (x + 3, y + 1),
         ]
         for i, j in logo4 + logo2:
-            maze.grid[j][i]
+            maze.grid[j][i].logo42 = True
 
     def _dfs_generator(self, maze: Maze) -> None:
         start = random.choice(random.choice(maze.grid))
