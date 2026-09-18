@@ -1,6 +1,6 @@
-from config import get_config
+from amz.config import get_config
 from pydantic import ValidationError
-from mazegen import Maze, MazeGenerator
+from amz.mazegen import Maze, MazeGenerator
 import logging
 import sys
 from pathlib import Path

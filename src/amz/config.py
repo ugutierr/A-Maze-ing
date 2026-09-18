@@ -3,7 +3,7 @@ import os
 from pydantic import BaseModel, field_validator, Field, model_validator
 from typing import Annotated, Any, Self
 from enum import Enum
-from mazegen import AlgorithmType
+from amz.mazegen import AlgorithmType
 
 
 class DisplayModeType(str, Enum):

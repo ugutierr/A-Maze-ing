@@ -1,4 +1,4 @@
-from mazegen.maze import Maze, Cell
+from amz.mazegen.maze import Maze, Cell
 import random
 from enum import Enum
 

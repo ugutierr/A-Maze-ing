@@ -1,7 +1,7 @@
 import pytest
 from typing import Any
 from pydantic import ValidationError
-from config import Config
+from amz.config import Config
 
 
 @pytest.mark.parametrize(
@@ -68,7 +68,7 @@ from config import Config
     ],
 )
 def test_invalid_config(
-    *args: Any,
+    args: tuple[Any],
 ) -> None:
     kw = (
         "width",
