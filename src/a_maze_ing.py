@@ -59,34 +59,42 @@ def gen_output_file(name: str, maze: Maze) -> None:
 def main() -> int:
     try:
         config = get_config()
-        maze_config = config.model_dump(
-            include={"width", "height", "entry", "exit"}
-        )
-        mazegen_config = config.model_dump(
-            include={"seed", "perfect", "algorithm"}
-        )
-        maze = Maze(**maze_config)
-        mazegen = MazeGenerator(**mazegen_config)
-        mazegen.generate(maze)
-        gen_output_file(config.output_file, maze)
-
-    except PermissionError:
-        logger.exception(
-            f"Permission denied to create or modify {config.output_file}"
-        )
-    except FileNotFoundError:
-        logger.exception(f"Could not find {config.output_file}")
-    except IsADirectoryError:
-        logger.exception(config.output_file, "is a directory")
-    except OSError as e:
-        logger.exception(f"Error openning file {e}")
     except ValidationError as e:
         logger.exception("Invalid configuration:")
         for error in e.errors():
             logger.exception(f"  {error['loc'][0]}: {error['msg']}")
-    else:
-        return 0
-    return 1
+        return 1
+
+    maze_config = config.model_dump(
+        include={"width", "height", "entry", "exit"}
+    )
+    mazegen_config = config.model_dump(
+        include={"seed", "perfect", "algorithm"}
+    )
+    maze = Maze(**maze_config)
+    mazegen = MazeGenerator(**mazegen_config)
+    mazegen.generate(maze)
+
+    try:
+        gen_output_file(config.output_file, maze)
+    except PermissionError:
+        logger.exception(
+            f"Permission denied to create or modify {config.output_file}"
+        )
+        return 1
+    except FileNotFoundError:
+        logger.exception(f"Could not find {config.output_file}")
+        return 1
+    except IsADirectoryError:
+        logger.exception(config.output_file, "is a directory")
+        return 1
+    except OSError as e:
+        logger.exception(f"Error openning file {e}")
+        return 1
+
+    # try:
+    #   print_maze()
+    return 0
 
 
 if __name__ == "__main__":
