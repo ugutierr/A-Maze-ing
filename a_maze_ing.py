@@ -62,7 +62,7 @@ def main() -> int:
     except ValidationError as e:
         logger.exception("Invalid configuration:")
         for error in e.errors():
-            logger.exception(f"  {error['loc'][0]}: {error['msg']}")
+            logger.exception(f"  {error['msg']}")
         return 1
 
     maze_config = config.model_dump(
@@ -93,7 +93,7 @@ def main() -> int:
         return 1
 
     # try:
-    #   print_maze()
+    #   render_maze()
     return 0
 
 

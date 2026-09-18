@@ -1,0 +1,88 @@
+2026-09-18 17:36:05,170 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 17:36:05,173 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 17:36:35,060 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 17:36:35,060 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 17:40:05,260 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 17:40:05,260 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 17:40:26,649 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 17:40:26,649 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 17:40:38,448 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 17:40:38,448 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 17:42:26,717 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 17:42:26,717 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 17:42:46,710 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 17:42:46,711 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 17:43:27,390 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 17:43:27,390 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 17:44:27,397 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 17:44:27,397 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 17:44:41,346 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 17:44:41,346 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 17:44:55,607 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 17:44:55,607 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 17:46:03,866 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 17:46:03,866 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 17:47:24,961 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 17:47:24,962 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 17:47:34,299 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 17:47:34,299 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 17:48:33,547 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 17:48:33,547 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 17:49:15,587 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 17:49:15,587 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 17:49:25,624 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 17:49:25,624 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 17:50:09,299 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 17:50:09,300 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 17:50:59,979 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 17:50:59,979 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 17:51:14,146 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 17:51:14,146 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 17:51:41,746 | ERROR: Unexpected error: cannot access local variable 'config' where it is not associated with a value | a_maze_ing.py:107
+2026-09-18 17:52:16,209 | ERROR: Unexpected error: 'int' object has no attribute 'model_dump' | a_maze_ing.py:107
+2026-09-18 17:52:38,883 | ERROR: Unexpected error: 'int' object has no attribute 'model_dump' | a_maze_ing.py:107
+2026-09-18 17:53:18,856 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 17:53:18,856 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 17:53:29,960 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 17:53:29,960 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 17:53:58,917 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 17:53:58,917 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 17:54:08,286 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 17:54:08,286 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 17:54:18,933 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 17:54:18,933 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 17:54:30,981 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 17:54:30,981 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 17:56:39,719 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 17:56:39,719 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 17:57:02,143 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 17:57:02,144 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 17:58:44,527 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 17:58:44,527 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 18:00:43,787 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 18:00:43,787 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 18:01:28,194 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 18:01:28,195 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 18:01:58,942 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 18:01:58,942 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 18:02:16,115 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 18:02:16,115 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 18:03:21,662 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 18:03:21,663 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 18:03:45,233 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 18:03:45,233 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 18:05:13,612 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 18:05:13,612 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 18:05:20,312 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 18:05:20,312 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 18:08:30,123 | ERROR: Invalid configuration: | a_maze_ing.py:64
+2026-09-18 18:08:30,124 | ERROR: {'type': 'value_error', 'loc': (), 'msg': 'Value error, Entry and exit cannot be the same cell', 'input': {'width': '20', 'height': '15', 'entry': '0,0', 'exit': '0,0', 'output_file': 'maze.txt', 'perfect': 'False', 'seed': None, 'algorithm': None, 'display_mode': None}, 'ctx': {'error': ValueError('Entry and exit cannot be the same cell')}, 'url': 'https://errors.pydantic.dev/2.13/v/value_error'} | a_maze_ing.py:66
+2026-09-18 18:08:38,280 | ERROR: Invalid configuration: | a_maze_ing.py:64
+2026-09-18 18:08:59,757 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 18:08:59,757 | ERROR: Unexpected error: tuple index out of range | a_maze_ing.py:107
+2026-09-18 18:09:10,584 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 18:09:10,584 | ERROR:   (): Value error, Entry and exit cannot be the same cell | a_maze_ing.py:65
+2026-09-18 18:09:28,348 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 18:09:28,349 | ERROR:   Value error, Entry and exit cannot be the same cell | a_maze_ing.py:65
+2026-09-18 18:11:55,964 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-18 18:11:55,964 | ERROR:   Value error, Entry and exit cannot be the same cell | a_maze_ing.py:65
