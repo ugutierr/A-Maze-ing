@@ -14,7 +14,7 @@ NonNegativeInt = Annotated[int, Field(ge=0)]
 
 
 class Config(BaseModel):
-    width: Annotated[int, Field(ge=13, le=1000)]
+    width: Annotated[int, Field(ge=11, le=1000)]
     height: Annotated[int, Field(ge=9, le=1000)]
     entry: tuple[NonNegativeInt, NonNegativeInt]
     exit: tuple[NonNegativeInt, NonNegativeInt]
