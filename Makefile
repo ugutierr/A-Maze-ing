@@ -12,32 +12,44 @@
 
 CONFIG ?= config.example.txt
 
-intall:
-	uv sync
+MYPY_FLAGS = \
+	--warn-return-any \
+	--warn-unused-ignores \
+	--ignore-missing-imports \
+	--disallow-untyped-defs \
+	--check-untyped-defs
+
+MYPY_EXCLUDE = --exclude '(^|/)mlx/'
+
+FLAKE8_FLAGS = --exclude=mlx
+
 
 run: install
 	uv run python3 a_maze_ing.py $(CONFIG)
 
-debug:
-	uv run python3 -m pdb a_maze_ing.py
+install:
+	uv sync
+
+debug: install
+	uv run python3 -m pdb a_maze_ing.py $(CONFIG)
 
 clean:
 	find . -type d -name "__pycache__" -not -path "./.venv/*"\
 	-prune -exec rm -rf {} +
-	rm -rf maze.txt
+	rm -f maze.txt
 
-lint: install
-	uv run flake8 .
-	uv run mypy . --warn-return-any --warn-unused-ignores\
-	--ignore-missing-imports --disallow-untyped-defs --check-untyped-defs
+flake8:
+	uv run flake8 . $(FLAKE8_FLAGS)
 
-lint-strict: install
-	uv run flake8 .
-	uv run mypy . --strict
+lint: install flake8
+	uv run mypy . $(MYPY_FLAGS) $(MYPY_EXCLUDE)
+
+lint-strict: install flake8
+	uv run mypy . --strict $(MYPY_EXCLUDE)
 
 
-test: run
+test: install
 	uv run pytest tests/
 	uv run python3 tests/maze_analyzer.py maze.txt 
 
-.PHONY: install run debug lint lint-strict run
+.PHONY: install run debug lint lint-strict run clean flake8 
