@@ -6,7 +6,7 @@
 #    By: ugutierr <ugutierr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/09/11 15:01:02 by ugutierr          #+#    #+#              #
-#    Updated: 2026/09/11 15:28:25 by ugutierr         ###   ########.fr        #
+#    Updated: 2026/09/19 13:20:34 by ugutierr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ lint-strict: install
 
 
 test: run
-	python3 tests/maze_analyzer.py maze.txt 
+	uv run pytest tests/
+	uv run python3 tests/maze_analyzer.py maze.txt 
 
 .PHONY: install run debug lint lint-strict run

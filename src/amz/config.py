@@ -71,7 +71,7 @@ class Config(BaseModel):
         return self
 
 
-def get_config() -> Config:
+def get_config(config_file: str) -> Config:
     config_keys = [
         "WIDTH",
         "HEIGHT",
@@ -84,7 +84,7 @@ def get_config() -> Config:
         "DISPLAY_MODE",
     ]
     config_dic: dict[Any, Any] = {}
-    load_dotenv("config.example.txt")
+    load_dotenv(config_file)
     for key in config_keys:
         config_dic[key.lower()] = os.getenv(key)
         if not config_dic[key.lower()]:

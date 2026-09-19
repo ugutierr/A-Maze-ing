@@ -86,3 +86,9 @@
 2026-09-18 18:09:28,349 | ERROR:   Value error, Entry and exit cannot be the same cell | a_maze_ing.py:65
 2026-09-18 18:11:55,964 | ERROR: Invalid configuration: | a_maze_ing.py:63
 2026-09-18 18:11:55,964 | ERROR:   Value error, Entry and exit cannot be the same cell | a_maze_ing.py:65
+2026-09-19 13:16:46,167 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-19 13:16:46,169 | ERROR:   Value error, Entry and exit cannot be the same cell | a_maze_ing.py:65
+2026-09-19 13:20:19,288 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-19 13:20:19,288 | ERROR:   Value error, Entry and exit cannot be the same cell | a_maze_ing.py:65
+2026-09-19 13:20:37,446 | ERROR: Invalid configuration: | a_maze_ing.py:63
+2026-09-19 13:20:37,446 | ERROR:   Value error, Entry and exit cannot be the same cell | a_maze_ing.py:65

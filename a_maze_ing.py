@@ -57,8 +57,15 @@ def gen_output_file(name: str, maze: Maze) -> None:
 
 
 def main() -> int:
+    if len(sys.argv) != 2:
+        logger.info(f"Invalid input: {len(sys.argv)} arguments given, 2 expected.")
+        logger.info("Use: uv run python3 a_maze_ing.py [config file]")
+        return 1
+    else:
+        config_file = sys.argv[1]
+        
     try:
-        config = get_config()
+        config = get_config(config_file)
     except ValidationError as e:
         logger.exception("Invalid configuration:")
         for error in e.errors():
