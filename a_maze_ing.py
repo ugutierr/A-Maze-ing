@@ -7,6 +7,15 @@ from pydantic import ValidationError
 
 from amz.config import get_config
 from amz.mazegen import Maze, MazeGenerator
+from amz.render import Window
+
+
+WINDOW_HEIGHT: int = 742
+MENU_WIDTH: int = 458
+MAZE_CANVAS_SIZE: int = WINDOW_HEIGHT
+WINDOW_WIDTH: int = MAZE_CANVAS_SIZE + MENU_WIDTH
+WINDOW_TITLE: str = "A-maze-ing"
+
 
 Path("logs").mkdir(exist_ok=True)
 
@@ -103,8 +112,22 @@ def main() -> int:
         logger.exception("Error openning file")
         return 1
 
-    # try:
-    #   render_maze()
+    try:
+        print("ANTES DE CREAR WINDOW")
+        window = Window(
+            WINDOW_WIDTH,
+            WINDOW_HEIGHT,
+            WINDOW_TITLE,
+            MAZE_CANVAS_SIZE,
+            maze,
+            mazegen,
+        )
+        print("WINDOW CREADA")
+        window.run()
+    except RuntimeError as error:
+        logger.exeption(f"Graphics error: {error}")
+        return 1
+
     return 0
 
 
@@ -115,5 +138,6 @@ if __name__ == "__main__":
         logger.info("Process interrupted")
         sys.exit(130)
     except Exception:
-        logger.exception("Unexpected error:")
-        sys.exit(2)
+        # logger.exception("Unexpected error:")
+        # sys.exit(2)
+        raise

@@ -200,3 +200,66 @@ pydantic_core._pydantic_core.ValidationError: 1 validation error for Config
     For further information visit https://errors.pydantic.dev/2.13/v/value_error
 2026-09-19 15:40:43,677 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:63
 2026-09-19 15:40:43,677 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:66
+2026-09-20 00:31:11,720 | ERROR: Unexpected error: | a_maze_ing.py:141
+Traceback (most recent call last):
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 136, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 117, in main
+    window = Window(
+        WINDOW_WIDTH,
+    ...<4 lines>...
+        mazegen,
+    )
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/amz/render/window.py", line 69, in __init__
+    self._draw()
+    ~~~~~~~~~~^^
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/amz/render/window.py", line 205, in _draw
+    self._draw_background()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/amz/render/window.py", line 229, in _draw_background
+    self.maze_canvas_size,
+    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Window' object has no attribute 'maze_canvas_size'
+2026-09-20 00:36:38,850 | ERROR: Unexpected error: | a_maze_ing.py:141
+Traceback (most recent call last):
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 136, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 117, in main
+    window = Window(
+        WINDOW_WIDTH,
+    ...<4 lines>...
+        mazegen,
+    )
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/amz/render/window.py", line 69, in __init__
+    self._draw()
+    ~~~~~~~~~~^^
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/amz/render/window.py", line 211, in _draw
+    self._draw_cells()
+    ~~~~~~~~~~~~~~~~^^
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/amz/render/window.py", line 296, in _draw_cells
+    self.EXIT_COLOR,
+    ^^^^^^^^^^^^^^^
+AttributeError: 'Window' object has no attribute 'EXIT_COLOR'. Did you mean: 'TEXT_COLOR'?
+2026-09-20 00:37:41,610 | ERROR: Unexpected error: | a_maze_ing.py:141
+Traceback (most recent call last):
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 136, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 117, in main
+    window = Window(
+        WINDOW_WIDTH,
+    ...<4 lines>...
+        mazegen,
+    )
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/amz/render/window.py", line 69, in __init__
+    self._draw()
+    ~~~~~~~~~~^^
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/amz/render/window.py", line 211, in _draw
+    self._draw_cells()
+    ~~~~~~~~~~~~~~~~^^
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/amz/render/window.py", line 296, in _draw_cells
+    self.EXIT_COLOR,
+    ^^^^^^^^^^^^^^^
+AttributeError: 'Window' object has no attribute 'EXIT_COLOR'. Did you mean: 'TEXT_COLOR'?
