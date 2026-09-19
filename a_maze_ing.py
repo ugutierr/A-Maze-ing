@@ -8,21 +8,20 @@ from pathlib import Path
 Path("logs").mkdir(exist_ok=True)
 
 
-class NoTracebackFilter(logging.Filter):
-    def filter(self, record: logging.LogRecord) -> bool:
-        record.exc_info = None
-        record.exc_text = None
-        return True
+class NoTracebackFormatter(logging.Formatter):
+    def formatException(self, exc_info):
+        return ""
 
 
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.DEBUG) # change before release
 
 # Terminal
 console_handler = logging.StreamHandler()
 console_handler.setLevel(logging.DEBUG)
-console_handler.setFormatter(logging.Formatter("%(levelname)s: %(message)s"))
-console_handler.addFilter(NoTracebackFilter())
+console_handler.setFormatter(
+    NoTracebackFormatter("%(levelname)s: %(message)s")
+)
 
 # File
 file_handler = logging.FileHandler("logs/maze.log")

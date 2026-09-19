@@ -92,3 +92,109 @@
 2026-09-19 13:20:19,288 | ERROR:   Value error, Entry and exit cannot be the same cell | a_maze_ing.py:65
 2026-09-19 13:20:37,446 | ERROR: Invalid configuration: | a_maze_ing.py:63
 2026-09-19 13:20:37,446 | ERROR:   Value error, Entry and exit cannot be the same cell | a_maze_ing.py:65
+2026-09-19 14:13:06,448 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:61
+2026-09-19 14:13:06,448 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:62
+2026-09-19 14:13:08,838 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:61
+2026-09-19 14:13:08,838 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:61
+2026-09-19 14:13:08,838 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:62
+2026-09-19 14:13:08,838 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:62
+2026-09-19 14:13:09,398 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:61
+2026-09-19 14:13:09,398 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:61
+2026-09-19 14:13:09,398 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:61
+2026-09-19 14:13:09,399 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:62
+2026-09-19 14:13:09,399 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:62
+2026-09-19 14:13:09,399 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:62
+2026-09-19 14:13:09,885 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:61
+2026-09-19 14:13:09,885 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:61
+2026-09-19 14:13:09,885 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:61
+2026-09-19 14:13:09,885 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:61
+2026-09-19 14:13:09,885 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:62
+2026-09-19 14:13:09,885 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:62
+2026-09-19 14:13:09,885 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:62
+2026-09-19 14:13:09,885 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:62
+2026-09-19 14:13:20,875 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:61
+2026-09-19 14:13:20,875 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:61
+2026-09-19 14:13:20,875 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:61
+2026-09-19 14:13:20,875 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:61
+2026-09-19 14:13:20,875 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:61
+2026-09-19 14:13:20,875 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:62
+2026-09-19 14:13:20,875 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:62
+2026-09-19 14:13:20,875 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:62
+2026-09-19 14:13:20,875 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:62
+2026-09-19 14:13:20,875 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:62
+2026-09-19 14:13:29,073 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:61
+2026-09-19 14:13:29,073 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:61
+2026-09-19 14:13:29,073 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:61
+2026-09-19 14:13:29,073 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:61
+2026-09-19 14:13:29,073 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:61
+2026-09-19 14:13:29,073 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:61
+2026-09-19 14:13:29,073 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:62
+2026-09-19 14:13:29,073 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:62
+2026-09-19 14:13:29,073 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:62
+2026-09-19 14:13:29,073 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:62
+2026-09-19 14:13:29,073 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:62
+2026-09-19 14:13:29,073 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:62
+2026-09-19 14:13:29,108 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:61
+2026-09-19 14:13:29,108 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:61
+2026-09-19 14:13:29,108 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:61
+2026-09-19 14:13:29,108 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:61
+2026-09-19 14:13:29,108 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:61
+2026-09-19 14:13:29,108 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:61
+2026-09-19 14:13:29,108 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:61
+2026-09-19 14:13:29,108 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:62
+2026-09-19 14:13:29,108 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:62
+2026-09-19 14:13:29,108 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:62
+2026-09-19 14:13:29,108 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:62
+2026-09-19 14:13:29,108 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:62
+2026-09-19 14:13:29,108 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:62
+2026-09-19 14:13:29,108 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:62
+2026-09-19 14:22:06,517 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:70
+2026-09-19 14:22:06,517 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:71
+2026-09-19 14:22:35,338 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:70
+2026-09-19 14:22:35,339 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:71
+2026-09-19 14:26:20,713 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:60
+2026-09-19 14:26:20,713 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:61
+2026-09-19 14:27:47,142 | ERROR: Invalid configuration: | a_maze_ing.py:69
+Traceback (most recent call last):
+  File "/home/ugutierr/Desktop/M2/amz/a_maze_ing.py", line 67, in main
+    config = get_config(config_file)
+  File "/home/ugutierr/Desktop/M2/amz/src/amz/config.py", line 92, in get_config
+    config = Config(**config_dic)
+  File "/home/ugutierr/Desktop/M2/amz/.venv/lib/python3.13/site-packages/pydantic/main.py", line 263, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Config
+  Value error, Entry and exit cannot be the same cell [type=value_error, input_value={'width': '20', 'height':...e, 'display_mode': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/value_error
+2026-09-19 14:27:47,143 | ERROR:   Value error, Entry and exit cannot be the same cell | a_maze_ing.py:71
+Traceback (most recent call last):
+  File "/home/ugutierr/Desktop/M2/amz/a_maze_ing.py", line 67, in main
+    config = get_config(config_file)
+  File "/home/ugutierr/Desktop/M2/amz/src/amz/config.py", line 92, in get_config
+    config = Config(**config_dic)
+  File "/home/ugutierr/Desktop/M2/amz/.venv/lib/python3.13/site-packages/pydantic/main.py", line 263, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Config
+  Value error, Entry and exit cannot be the same cell [type=value_error, input_value={'width': '20', 'height':...e, 'display_mode': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/value_error
+2026-09-19 14:30:36,256 | ERROR: Invalid configuration: | a_maze_ing.py:69
+Traceback (most recent call last):
+  File "/home/ugutierr/Desktop/M2/amz/a_maze_ing.py", line 67, in main
+    config = get_config(config_file)
+  File "/home/ugutierr/Desktop/M2/amz/src/amz/config.py", line 92, in get_config
+    config = Config(**config_dic)
+  File "/home/ugutierr/Desktop/M2/amz/.venv/lib/python3.13/site-packages/pydantic/main.py", line 263, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Config
+  Value error, Entry and exit cannot be the same cell [type=value_error, input_value={'width': '20', 'height':...e, 'display_mode': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/value_error
+2026-09-19 14:30:36,257 | ERROR:   Value error, Entry and exit cannot be the same cell | a_maze_ing.py:71
+Traceback (most recent call last):
+  File "/home/ugutierr/Desktop/M2/amz/a_maze_ing.py", line 67, in main
+    config = get_config(config_file)
+  File "/home/ugutierr/Desktop/M2/amz/src/amz/config.py", line 92, in get_config
+    config = Config(**config_dic)
+  File "/home/ugutierr/Desktop/M2/amz/.venv/lib/python3.13/site-packages/pydantic/main.py", line 263, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Config
+  Value error, Entry and exit cannot be the same cell [type=value_error, input_value={'width': '20', 'height':...e, 'display_mode': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/value_error

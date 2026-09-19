@@ -6,7 +6,7 @@
 #    By: ugutierr <ugutierr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/09/11 15:01:02 by ugutierr          #+#    #+#              #
-#    Updated: 2026/09/19 13:20:34 by ugutierr         ###   ########.fr        #
+#    Updated: 2026/09/19 14:30:20 by ugutierr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,10 @@ intall:
 	uv sync
 
 run: install
-	uv run python3 a_maze_ing.py
+	uv run python3 a_maze_ing.py $(CONFIG)
 
 debug:
+	uv run python3 -m pdb a_maze_ing.py
 
 clean:
 	find . -type d -name "__pycache__" -not -path "./.venv/*"\
