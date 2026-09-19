@@ -19,9 +19,9 @@ MYPY_FLAGS = \
 	--disallow-untyped-defs \
 	--check-untyped-defs
 
-MYPY_EXCLUDE = --exclude '(^|/)mlx/'
+MYPY_EXCLUDE = --exclude '(^|/)mlx|.venv/'
 
-FLAKE8_FLAGS = --exclude=mlx
+FLAKE8_FLAGS = --exclude=mlx,.venv
 
 
 run: install
