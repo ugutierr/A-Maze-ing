@@ -1,20 +1,23 @@
-from amz.config import get_config
-from pydantic import ValidationError
-from amz.mazegen import Maze, MazeGenerator
 import logging
 import sys
 from pathlib import Path
+from typing import Any
+
+from pydantic import ValidationError
+
+from amz.config import get_config
+from amz.mazegen import Maze, MazeGenerator
 
 Path("logs").mkdir(exist_ok=True)
 
 
 class NoTracebackFormatter(logging.Formatter):
-    def formatException(self, exc_info):
+    def formatException(self, exc_info: Any) -> str:
         return ""
 
 
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG) # change before release
+logger.setLevel(logging.DEBUG)  # change before release
 
 # Terminal
 console_handler = logging.StreamHandler()
@@ -57,12 +60,14 @@ def gen_output_file(name: str, maze: Maze) -> None:
 
 def main() -> int:
     if len(sys.argv) != 2:
-        logger.info(f"Invalid input: {len(sys.argv)} arguments given, 2 expected.")
+        logger.info(
+            f"Invalid input: {len(sys.argv)} arguments given, 2 expected."
+        )
         logger.info("Use: uv run python3 a_maze_ing.py [config file]")
         return 1
     else:
         config_file = sys.argv[1]
-        
+
     try:
         config = get_config(config_file)
     except ValidationError as e:
@@ -94,8 +99,8 @@ def main() -> int:
     except IsADirectoryError:
         logger.exception(config.output_file, "is a directory")
         return 1
-    except OSError as e:
-        logger.exception(f"Error openning file {e}")
+    except OSError:
+        logger.exception("Error openning file")
         return 1
 
     # try:
@@ -109,6 +114,6 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         logger.info("Process interrupted")
         sys.exit(130)
-    except Exception as e:
-        logger.exception(f"Unexpected error: {e}")
+    except Exception:
+        logger.exception("Unexpected error:")
         sys.exit(2)

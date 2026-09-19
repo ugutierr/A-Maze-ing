@@ -198,3 +198,5 @@ Traceback (most recent call last):
 pydantic_core._pydantic_core.ValidationError: 1 validation error for Config
   Value error, Entry and exit cannot be the same cell [type=value_error, input_value={'width': '20', 'height':...e, 'display_mode': None}, input_type=dict]
     For further information visit https://errors.pydantic.dev/2.13/v/value_error
+2026-09-19 15:40:43,677 | INFO: Invalid input: 1 arguments given, 2 expected. | a_maze_ing.py:63
+2026-09-19 15:40:43,677 | INFO: Use: uv run python3 a_maze_ing.py [config file] | a_maze_ing.py:66

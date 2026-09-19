@@ -1,6 +1,7 @@
-from amz.mazegen.maze import Maze, Cell
 import random
 from enum import Enum
+
+from amz.mazegen.maze import Cell, Maze
 
 
 class AlgorithmType(str, Enum):

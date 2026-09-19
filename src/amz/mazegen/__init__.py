@@ -1,4 +1,4 @@
-from amz.mazegen.maze_generator import MazeGenerator, AlgorithmType
-from amz.mazegen.maze import Maze, Cell
+from amz.mazegen.maze import Cell, Maze
+from amz.mazegen.maze_generator import AlgorithmType, MazeGenerator
 
 __all__ = ["Maze", "MazeGenerator", "AlgorithmType", "Cell"]
