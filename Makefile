@@ -73,4 +73,4 @@ kill:
 	@kill "$$(ps aux | grep "a_maze_ing" | awk 'NF {print $$2; exit}')"
 
 
-.PHONY: install run debug lint lint-strict run clean flake8 tree
+.PHONY: install run debug lint lint-strict run clean flake8 tree kill
