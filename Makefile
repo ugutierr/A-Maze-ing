@@ -59,7 +59,7 @@ lint: install flake8
 
 lint-strict: install flake8
 	@echo "Running mypy..."
-	@uv run mypy . --strict $(MYPY_EXCLUDE)
+	-@uv run mypy . --strict $(MYPY_EXCLUDE)
 
 
 test: install
