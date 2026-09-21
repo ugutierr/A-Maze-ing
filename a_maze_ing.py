@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import ValidationError
 
-from config import get_config
+from config import ConfigError, get_config
 from mazegen import Maze, MazeGenerator
 from render import Window
 
@@ -79,6 +79,8 @@ def main() -> int:
         for error in e.errors():
             logger.exception(f"  {error['msg']}")
         return 1
+    except ConfigError as e:
+        logger.exception(e)
 
     maze_config = config.model_dump(
         include={"width", "height", "entry", "exit"}

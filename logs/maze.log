@@ -311,3 +311,192 @@ pydantic_core._pydantic_core.ValidationError: 1 validation error for Config
 width
   Input should be greater than or equal to 11 [type=greater_than_equal, input_value='10', input_type=str]
     For further information visit https://errors.pydantic.dev/2.13/v/greater_than_equal
+2026-09-21 17:39:14,223 | ERROR: Invalid configuration: | a_maze_ing.py:78
+Traceback (most recent call last):
+  File "/home/ugutierr/Desktop/M2/A-Maze-ing/a_maze_ing.py", line 76, in main
+    config = get_config(config_file)
+  File "/home/ugutierr/Desktop/M2/A-Maze-ing/src/config.py", line 94, in get_config
+    config = Config(**config_dic)
+  File "/home/ugutierr/Desktop/M2/A-Maze-ing/.venv/lib/python3.13/site-packages/pydantic/main.py", line 263, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 6 validation errors for Config
+width
+  Input should be a valid integer [type=int_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/int_type
+height
+  Input should be a valid integer [type=int_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/int_type
+entry
+  Input should be a valid tuple [type=tuple_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/tuple_type
+exit
+  Input should be a valid tuple [type=tuple_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/tuple_type
+output_file
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/string_type
+perfect
+  Input should be a valid boolean [type=bool_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/bool_type
+2026-09-21 17:39:14,226 | ERROR:   Input should be a valid integer | a_maze_ing.py:80
+Traceback (most recent call last):
+  File "/home/ugutierr/Desktop/M2/A-Maze-ing/a_maze_ing.py", line 76, in main
+    config = get_config(config_file)
+  File "/home/ugutierr/Desktop/M2/A-Maze-ing/src/config.py", line 94, in get_config
+    config = Config(**config_dic)
+  File "/home/ugutierr/Desktop/M2/A-Maze-ing/.venv/lib/python3.13/site-packages/pydantic/main.py", line 263, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 6 validation errors for Config
+width
+  Input should be a valid integer [type=int_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/int_type
+height
+  Input should be a valid integer [type=int_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/int_type
+entry
+  Input should be a valid tuple [type=tuple_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/tuple_type
+exit
+  Input should be a valid tuple [type=tuple_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/tuple_type
+output_file
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/string_type
+perfect
+  Input should be a valid boolean [type=bool_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/bool_type
+2026-09-21 17:39:14,226 | ERROR:   Input should be a valid integer | a_maze_ing.py:80
+Traceback (most recent call last):
+  File "/home/ugutierr/Desktop/M2/A-Maze-ing/a_maze_ing.py", line 76, in main
+    config = get_config(config_file)
+  File "/home/ugutierr/Desktop/M2/A-Maze-ing/src/config.py", line 94, in get_config
+    config = Config(**config_dic)
+  File "/home/ugutierr/Desktop/M2/A-Maze-ing/.venv/lib/python3.13/site-packages/pydantic/main.py", line 263, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 6 validation errors for Config
+width
+  Input should be a valid integer [type=int_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/int_type
+height
+  Input should be a valid integer [type=int_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/int_type
+entry
+  Input should be a valid tuple [type=tuple_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/tuple_type
+exit
+  Input should be a valid tuple [type=tuple_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/tuple_type
+output_file
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/string_type
+perfect
+  Input should be a valid boolean [type=bool_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/bool_type
+2026-09-21 17:39:14,227 | ERROR:   Input should be a valid tuple | a_maze_ing.py:80
+Traceback (most recent call last):
+  File "/home/ugutierr/Desktop/M2/A-Maze-ing/a_maze_ing.py", line 76, in main
+    config = get_config(config_file)
+  File "/home/ugutierr/Desktop/M2/A-Maze-ing/src/config.py", line 94, in get_config
+    config = Config(**config_dic)
+  File "/home/ugutierr/Desktop/M2/A-Maze-ing/.venv/lib/python3.13/site-packages/pydantic/main.py", line 263, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 6 validation errors for Config
+width
+  Input should be a valid integer [type=int_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/int_type
+height
+  Input should be a valid integer [type=int_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/int_type
+entry
+  Input should be a valid tuple [type=tuple_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/tuple_type
+exit
+  Input should be a valid tuple [type=tuple_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/tuple_type
+output_file
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/string_type
+perfect
+  Input should be a valid boolean [type=bool_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/bool_type
+2026-09-21 17:39:14,227 | ERROR:   Input should be a valid tuple | a_maze_ing.py:80
+Traceback (most recent call last):
+  File "/home/ugutierr/Desktop/M2/A-Maze-ing/a_maze_ing.py", line 76, in main
+    config = get_config(config_file)
+  File "/home/ugutierr/Desktop/M2/A-Maze-ing/src/config.py", line 94, in get_config
+    config = Config(**config_dic)
+  File "/home/ugutierr/Desktop/M2/A-Maze-ing/.venv/lib/python3.13/site-packages/pydantic/main.py", line 263, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 6 validation errors for Config
+width
+  Input should be a valid integer [type=int_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/int_type
+height
+  Input should be a valid integer [type=int_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/int_type
+entry
+  Input should be a valid tuple [type=tuple_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/tuple_type
+exit
+  Input should be a valid tuple [type=tuple_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/tuple_type
+output_file
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/string_type
+perfect
+  Input should be a valid boolean [type=bool_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/bool_type
+2026-09-21 17:39:14,228 | ERROR:   Input should be a valid string | a_maze_ing.py:80
+Traceback (most recent call last):
+  File "/home/ugutierr/Desktop/M2/A-Maze-ing/a_maze_ing.py", line 76, in main
+    config = get_config(config_file)
+  File "/home/ugutierr/Desktop/M2/A-Maze-ing/src/config.py", line 94, in get_config
+    config = Config(**config_dic)
+  File "/home/ugutierr/Desktop/M2/A-Maze-ing/.venv/lib/python3.13/site-packages/pydantic/main.py", line 263, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 6 validation errors for Config
+width
+  Input should be a valid integer [type=int_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/int_type
+height
+  Input should be a valid integer [type=int_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/int_type
+entry
+  Input should be a valid tuple [type=tuple_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/tuple_type
+exit
+  Input should be a valid tuple [type=tuple_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/tuple_type
+output_file
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/string_type
+perfect
+  Input should be a valid boolean [type=bool_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/bool_type
+2026-09-21 17:39:14,228 | ERROR:   Input should be a valid boolean | a_maze_ing.py:80
+Traceback (most recent call last):
+  File "/home/ugutierr/Desktop/M2/A-Maze-ing/a_maze_ing.py", line 76, in main
+    config = get_config(config_file)
+  File "/home/ugutierr/Desktop/M2/A-Maze-ing/src/config.py", line 94, in get_config
+    config = Config(**config_dic)
+  File "/home/ugutierr/Desktop/M2/A-Maze-ing/.venv/lib/python3.13/site-packages/pydantic/main.py", line 263, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 6 validation errors for Config
+width
+  Input should be a valid integer [type=int_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/int_type
+height
+  Input should be a valid integer [type=int_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/int_type
+entry
+  Input should be a valid tuple [type=tuple_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/tuple_type
+exit
+  Input should be a valid tuple [type=tuple_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/tuple_type
+output_file
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/string_type
+perfect
+  Input should be a valid boolean [type=bool_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/bool_type

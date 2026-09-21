@@ -1,11 +1,16 @@
 import os
 from enum import Enum
+from pathlib import Path
 from typing import Annotated, Any, Self
 
 from dotenv import load_dotenv
 from pydantic import BaseModel, Field, field_validator, model_validator
 
 from mazegen import AlgorithmType
+
+
+class ConfigError(RuntimeError):
+    pass
 
 
 class DisplayModeType(str, Enum):
@@ -71,6 +76,32 @@ class Config(BaseModel):
                     + " less than width and height respectively"
                 )
         return self
+
+
+def load_config(config_file: str) -> None:
+    path = Path(config_file)
+
+    if not path.exists():
+        raise ConfigError(f"Configuration file not found: {path}")
+
+    if not path.is_file():
+        raise ConfigError(f"Configuration path is not a file: {path}")
+
+    try:
+        load_dotenv(path)
+
+    except PermissionError as e:
+        raise ConfigError(
+            f"Cannot read configuration file (permission denied): {path}"
+        ) from e
+    except UnicodeDecodeError as e:
+        raise ConfigError(
+            f"Cannot read configuration file (invalid UTF-8): {path}"
+        ) from e
+    except OSError as e:
+        raise ConfigError(
+            f"Cannot read configuration file: {path}: {e}"
+        ) from e
 
 
 def get_config(config_file: str) -> Config:
