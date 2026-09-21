@@ -9,14 +9,14 @@ description = "Maze generation module."
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "flake8>=7.3.0",
-    "mypy>=2.3.1",
     "pydantic>=2.13.5",
     "python-dotenv>=1.2.3",
 ]
 
 [dependency-groups]
 dev = [
+    "flake8>=7.3.0",
+    "mypy>=2.3.1",
     "pytest>=9.1.1",
 ]
 
