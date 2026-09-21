@@ -27,6 +27,7 @@ MODULE = mazegen-1.0.0-py3-none-any.whl
 
 
 
+
 install: $(MODULE)
 	@uv sync
 	@echo "Installation complete."
@@ -39,15 +40,19 @@ $(MODULE):
 	@uv build
 	@echo "Build complete."
 
+
+
+
+test: install
+	@uv run pytest tests/
+	@uv run python3 tests/maze_analyzer.py maze.txt 
+
 debug: install
+	@echo "Running a_maze_ing.py...\n"
 	@uv run python3 -m pdb a_maze_ing.py $(CONFIG)
 
-clean:
-	@echo "Cleaning project..."
-	@find . -type d \( -name "__pycache__" -o -name ".mypy_cache" \) \
-  -not -path "./.venv/*" -prune -exec rm -rf {} +
-	@rm -f maze.txt
-	@rm -rf dist/
+
+
 
 flake8:
 	@echo "Running flake8..."
@@ -62,15 +67,22 @@ lint-strict: install flake8
 	-@uv run mypy . --strict $(MYPY_EXCLUDE)
 
 
-test: install
-	@uv run pytest tests/
-	@uv run python3 tests/maze_analyzer.py maze.txt 
+
 
 tree: 
 	@tree -a -I '.git|.venv'
 
 kill:
 	@kill "$$(ps aux | grep "a_maze_ing" | awk 'NF {print $$2; exit}')"
+
+clean:
+	@echo "Cleaning project..."
+	@find . -type d \( -name "__pycache__" -o -name ".mypy_cache" \) \
+  -not -path "./.venv/*" -prune -exec rm -rf {} +
+	@rm -f maze.txt
+	@rm -rf dist/
+
+
 
 
 .PHONY: install run debug lint lint-strict run clean flake8 tree kill
