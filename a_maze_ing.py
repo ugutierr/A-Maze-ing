@@ -10,10 +10,6 @@ from amz.mazegen import Maze, MazeGenerator
 from amz.render import Window
 
 
-WINDOW_HEIGHT: int = 742
-MENU_WIDTH: int = 458
-MAZE_CANVAS_SIZE: int = WINDOW_HEIGHT
-WINDOW_WIDTH: int = MAZE_CANVAS_SIZE + MENU_WIDTH
 WINDOW_TITLE: str = "A-maze-ing"
 
 
@@ -115,10 +111,7 @@ def main() -> int:
     try:
         print("ANTES DE CREAR WINDOW")
         window = Window(
-            WINDOW_WIDTH,
-            WINDOW_HEIGHT,
             WINDOW_TITLE,
-            MAZE_CANVAS_SIZE,
             maze,
             mazegen,
         )

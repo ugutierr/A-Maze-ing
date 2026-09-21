@@ -263,3 +263,51 @@ Traceback (most recent call last):
     self.EXIT_COLOR,
     ^^^^^^^^^^^^^^^
 AttributeError: 'Window' object has no attribute 'EXIT_COLOR'. Did you mean: 'TEXT_COLOR'?
+2026-09-21 00:53:49,842 | ERROR: Invalid configuration: | a_maze_ing.py:79
+Traceback (most recent call last):
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 77, in main
+    config = get_config(config_file)
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/amz/config.py", line 92, in get_config
+    config = Config(**config_dic)
+  File "/home/cdiaz-to/cursus/a-maze-ing/.venv/lib/python3.13/site-packages/pydantic/main.py", line 263, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Config
+width
+  Input should be less than or equal to 1000 [type=less_than_equal, input_value='3333333333333333333333333333333330', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/less_than_equal
+2026-09-21 00:53:49,852 | ERROR:   Input should be less than or equal to 1000 | a_maze_ing.py:81
+Traceback (most recent call last):
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 77, in main
+    config = get_config(config_file)
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/amz/config.py", line 92, in get_config
+    config = Config(**config_dic)
+  File "/home/cdiaz-to/cursus/a-maze-ing/.venv/lib/python3.13/site-packages/pydantic/main.py", line 263, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Config
+width
+  Input should be less than or equal to 1000 [type=less_than_equal, input_value='3333333333333333333333333333333330', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/less_than_equal
+2026-09-21 00:57:15,790 | ERROR: Invalid configuration: | a_maze_ing.py:79
+Traceback (most recent call last):
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 77, in main
+    config = get_config(config_file)
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/amz/config.py", line 92, in get_config
+    config = Config(**config_dic)
+  File "/home/cdiaz-to/cursus/a-maze-ing/.venv/lib/python3.13/site-packages/pydantic/main.py", line 263, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Config
+width
+  Input should be greater than or equal to 11 [type=greater_than_equal, input_value='10', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/greater_than_equal
+2026-09-21 00:57:15,791 | ERROR:   Input should be greater than or equal to 11 | a_maze_ing.py:81
+Traceback (most recent call last):
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 77, in main
+    config = get_config(config_file)
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/amz/config.py", line 92, in get_config
+    config = Config(**config_dic)
+  File "/home/cdiaz-to/cursus/a-maze-ing/.venv/lib/python3.13/site-packages/pydantic/main.py", line 263, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Config
+width
+  Input should be greater than or equal to 11 [type=greater_than_equal, input_value='10', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/greater_than_equal

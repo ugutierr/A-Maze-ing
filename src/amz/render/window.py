@@ -1,3 +1,6 @@
+import math
+
+
 from amz.mazegen import Maze, MazeGenerator
 from amz.mlx.mlx import Mlx
 
@@ -13,7 +16,7 @@ class Window:
     BACKGROUND_COLOR: int = 0x101014
     PANEL_COLOR: int = 0x18181F
     WALL_COLOR: int = 0xFFFFFF
-    WALL_COLOR_2: int = 0x00D9FF
+    WALL_COLOR_2: int = 0xFF00D9FF
     ENTRY_COLOR: int = 0x00FF3355
     EXIT_COLOR: int = 0xFF3355
     PATH_COLOR: int = 0xFFD43B
@@ -21,18 +24,19 @@ class Window:
     TEXT_COLOR: int = 0xFFFFFF
     MUTED_TEXT_COLOR: int = 0xAAAAAA
 
+    REFERENCE_SCREEN_WIDTH: int = 1920
+    REFERENCE_SCREEN_HEIGHT: int = 1080
+
+    REFERENCE_WINDOW_WIDTH: int = 1200
+
+    GOLDEN_RATIO: float = (1 + math.sqrt(5)) / 2
+
     def __init__(
         self,
-        width: int,
-        height: int,
         title: str,
-        maze_size: int,
         maze: Maze,
         generator: MazeGenerator,
     ) -> None:
-        self.width = width
-        self.height = height
-        self.maze_size = maze_size
         self.maze = maze
         self.generator = generator
 
@@ -42,6 +46,9 @@ class Window:
         if self._mlx_ptr is None:
             raise RuntimeError("Filed to initialise MLX")
 
+        self.width, self.height = self._get_window_size()
+        self._maze_size = self.height
+
         self._win_ptr = self._mlx.mlx_new_window(
             self._mlx_ptr,
             self.width,
@@ -49,19 +56,29 @@ class Window:
             title,
         )
 
+        if self._win_ptr is None:
+            self._mlx.mlx_release(self._mlx_ptr)
+            raise RuntimeError("Failed to create the window")
+
         self._image = self._mlx.mlx_new_image(
             self._mlx_ptr,
             self.width,
             self.height,
         )
 
-        self._image_data = self._mlx.mlx_get_data_addr(
-            self._image,
-        )
-
-        if self._win_ptr is None:
+        if self._image is None:
+            self._mlx.mlx_destroy_window(
+                self._mlx_ptr,
+                self._win_ptr,
+            )
             self._mlx.mlx_release(self._mlx_ptr)
-            raise RuntimeError("Failed to create the window")
+            raise RuntimeError("Failed to created the image")
+
+        self._image_data = self._mlx.mlx_get_data_addr(self._image)
+        
+        self._image_buffer = self._image_data[0]
+        self._bits_per_pixel = self._image_data[1]
+        self._size_line = self._image_data[2]
 
         self._show_path: bool = False
         self._wall_color: int = self.WALL_COLOR
@@ -76,9 +93,8 @@ class Window:
 
         self._calculate_geometry()
         self._register_events()
-        print("ANTES DE DRAW")
+
         self._draw()
-        print("DESPUES DE DRAW")
 
     def run(self) -> None:
         print("ENTRANDO EN MLX LOOP")
@@ -94,24 +110,72 @@ class Window:
         self._mlx.mlx_destroy_window(self._mlx_ptr, self._mlx_ptr)
         self._mlx.mlx_release(self._mlx_ptr)
 
+    def _get_window_size(self) -> tuple[int, int]:
+        result: int
+        screen_width: int
+        screen_height: int
+
+        result, screen_width, screen_height = (
+            self._mlx.mlx_get_screen_size(self._mlx_ptr)
+        )
+
+        if result != 0:
+            raise RuntimeError("Failed to get screen size")
+
+        if screen_width <= 0 or screen_height <= 0:
+            raise RuntimeError("Invalid screen size")
+
+        scale_x: float = (screen_width / self.REFERENCE_SCREEN_WIDTH)
+        scale_y: float = (screen_height / self.REFERENCE_SCREEN_HEIGHT)
+
+        scale: float = min(scale_x, scale_y)
+
+        window_width: int = max(1, round(self.REFERENCE_WINDOW_WIDTH * scale))
+
+        window_height: int = max(1, round(window_width / self.GOLDEN_RATIO))
+
+        return window_width, window_height
+
     def _calculate_geometry(self) -> None:
         rows: int = self.maze.height
         columns: int = self.maze.width
+        largest_dimension: int = max(rows, columns)
 
-        if rows <= 15 and columns <= 15:
-            self._cell_size = 32.0
-        elif rows <= 35 and columns <= 35:
-            self._cell_size = 16.0
+        reference_canvas_size: float = 742.0
+
+        if largest_dimension <= 15:
+            reference_cell_size: float = 40.0
+        elif largest_dimension <= 25:
+            reference_cell_size: float = 24.0
+        elif largest_dimension <= 35:
+            reference_cell_size: float = 16.0
         else:
-            available_size: float = self.maze_size * 0.9
+            available_size: float = self._maze_size * 0.9
+            denominator: int = largest_dimension + 1
 
-            width_size: float = available_size / (columns + 1)
-            height_size: float = available_size / (rows + 1)
+            self._cell_size = available_size / denominator
 
-            self._cell_size = min(width_size, height_size)
+            self._border_size = self._cell_size * 0.5
 
-            if self._cell_size < 2.0:
-                self._cell_size = 2.0
+            self._grid_width = columns * self._cell_size
+            self._grid_height = rows * self._cell_size
+
+            total_width: float = (self._grid_width + self._border_size * 2)
+            total_height: float = (self._grid_height + self._border_size * 2)
+
+            self._maze_x = (
+                self._maze_size - total_width
+            ) / 2 + self._border_size
+
+            self._maze_y = (
+                self._maze_size - total_height
+            ) / 2 + self._border_size
+
+            return
+
+        scale: float = (self._maze_size / reference_canvas_size)
+
+        self._cell_size = reference_cell_size * scale
 
         self._border_size = self._cell_size * 0.5
 
@@ -119,15 +183,10 @@ class Window:
         self._grid_height = rows * self._cell_size
 
         total_width: float = (self._grid_width + self._border_size * 2)
-        total_height: float = (self._grid_height + self._border_size * 2)
+        total_height: float = (self._grid_height - self._border_size * 2)
 
-        self._maze_x = (
-            self.maze_size - total_width
-        ) / 2 + self._border_size
-
-        self._maze_y = (
-            self.maze_size - total_height
-        ) / 2 + self._border_size
+        self._maze_x = (self._maze_size - total_width) / 2
+        self._maze_y = (self._maze_size - total_height) / 2
 
     def _register_events(self) -> None:
         self._mlx.mlx_key_hook(
@@ -186,52 +245,15 @@ class Window:
 
         self._draw()
 
-    """
     def _draw(self) -> None:
-        self._mlx.mlx_clear_window(
-            self._mlx_ptr,
-            self._mlx_ptr,
-        )
-
-        self._draw_background()
-        self._draw_border()
-        self._draw_cells()
-        self._draw_walls()
-
-        if self._show_path:
-            self._draw_solution_path()
-
-        self._draw_panel()
-    """
-    def _draw(self) -> None:
-        """Redraw the complete window."""
-        print("DRAW 1")
-
         self._mlx.mlx_clear_window(
             self._mlx_ptr,
             self._win_ptr,
         )
 
-        print("DRAW 2")
-        self._draw_background()
-
-        print("DRAW 3")
-        self._draw_border()
-
-        print("DRAW 4")
-        self._draw_cells()
-
-        print("DRAW 5")
         self._draw_walls()
 
-        print("DRAW 6")
-        if self._show_path:
-            self._draw_solution_path()
-
-        print("DRAW 7")
-        self._draw_panel()
-
-        print("DRAW 8")
+        self._mlx.mlx_do_sync(self._mlx_ptr)
 
     def _draw_background(self) -> None:
         self._fill_rectangle(
@@ -320,49 +342,57 @@ class Window:
         self._fill_rectangle(x, y, size, size, color)
 
     def _draw_walls(self) -> None:
-        thickness: int = max(1, int(self._cell_size * 0.08))
+        color: int = self.WALL_COLOR_2
 
         for row in self.maze.grid:
             for cell in row:
-                x: int = int(self._maze_x + cell.column * self._cell_size)
-                y: int = int(self._maze_y + cell.row * self._cell_size)
+                x: int = int(
+                    self._maze_x + cell.column * self._cell_size
+                )
+                y: int = int(
+                    self._maze_y + cell.row * self._cell_size
+                )
                 size: int = int(self._cell_size)
 
                 if cell.north:
-                    self._fill_rectangle(
-                        x,
-                        y,
-                        size,
-                        thickness,
-                        self._wall_color,
-                    )
+                    for offset in range(size):
+                        self._mlx.mlx_pixel_put(
+                            self._mlx_ptr,
+                            self._win_ptr,
+                            x + offset,
+                            y,
+                            color,
+                        )
 
                 if cell.east:
-                    self._fill_rectangle(
-                        x + size - thickness,
-                        y,
-                        thickness,
-                        size,
-                        self._wall_color,
-                    )
+                    for offset in range(size):
+                        self._mlx.mlx_pixel_put(
+                            self._mlx_ptr,
+                            self._win_ptr,
+                            x + size - 1,
+                            y + offset,
+                            color,
+                        )
 
                 if cell.south:
-                    self._fill_rectangle(
-                        x,
-                        y + size - thickness,
-                        size,
-                        thickness,
-                        self._wall_color,
-                    )
+                    for offset in range(size):
+                        self._mlx.mlx_pixel_put(
+                            self._mlx_ptr,
+                            self._win_ptr,
+                            x + offset,
+                            y + size - 1,
+                            color,
+                        )
 
                 if cell.west:
-                    self._fill_rectangle(
-                        x,
-                        y,
-                        thickness,
-                        size,
-                        self._wall_color,
-                    )
+                    for offset in range(size):
+                        self._mlx.mlx_pixel_put(
+                            self._mlx_ptr,
+                            self._win_ptr,
+                            x,
+                            y + offset,
+                            color,
+                        )
 
     def _draw_solution_path(self) -> None:
         path: str = self.maze.shortest_path()
