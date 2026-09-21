@@ -1,7 +1,8 @@
 import math
 
-from mazegen import Maze, MazeGenerator
 from mlx.mlx import Mlx
+
+from mazegen import Maze, MazeGenerator
 
 
 class Window:
