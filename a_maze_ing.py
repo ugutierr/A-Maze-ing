@@ -9,7 +9,6 @@ from amz.config import get_config
 from amz.mazegen import Maze, MazeGenerator
 from amz.render import Window
 
-
 WINDOW_TITLE: str = "A-maze-ing"
 
 
@@ -118,7 +117,7 @@ def main() -> int:
         print("WINDOW CREADA")
         window.run()
     except RuntimeError as error:
-        logger.exeption(f"Graphics error: {error}")
+        logger.exception(f"Graphics error: {error}")
         return 1
 
     return 0
@@ -131,6 +130,5 @@ if __name__ == "__main__":
         logger.info("Process interrupted")
         sys.exit(130)
     except Exception:
-        # logger.exception("Unexpected error:")
-        # sys.exit(2)
-        raise
+        logger.exception("Unexpected error:")
+        sys.exit(2)

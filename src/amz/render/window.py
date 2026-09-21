@@ -1,6 +1,5 @@
 import math
 
-
 from amz.mazegen import Maze, MazeGenerator
 from amz.mlx.mlx import Mlx
 
@@ -75,7 +74,7 @@ class Window:
             raise RuntimeError("Failed to created the image")
 
         self._image_data = self._mlx.mlx_get_data_addr(self._image)
-        
+
         self._image_buffer = self._image_data[0]
         self._bits_per_pixel = self._image_data[1]
         self._size_line = self._image_data[2]
@@ -115,8 +114,8 @@ class Window:
         screen_width: int
         screen_height: int
 
-        result, screen_width, screen_height = (
-            self._mlx.mlx_get_screen_size(self._mlx_ptr)
+        result, screen_width, screen_height = self._mlx.mlx_get_screen_size(
+            self._mlx_ptr
         )
 
         if result != 0:
@@ -125,8 +124,8 @@ class Window:
         if screen_width <= 0 or screen_height <= 0:
             raise RuntimeError("Invalid screen size")
 
-        scale_x: float = (screen_width / self.REFERENCE_SCREEN_WIDTH)
-        scale_y: float = (screen_height / self.REFERENCE_SCREEN_HEIGHT)
+        scale_x: float = screen_width / self.REFERENCE_SCREEN_WIDTH
+        scale_y: float = screen_height / self.REFERENCE_SCREEN_HEIGHT
 
         scale: float = min(scale_x, scale_y)
 
@@ -160,8 +159,8 @@ class Window:
             self._grid_width = columns * self._cell_size
             self._grid_height = rows * self._cell_size
 
-            total_width: float = (self._grid_width + self._border_size * 2)
-            total_height: float = (self._grid_height + self._border_size * 2)
+            total_width: float = self._grid_width + self._border_size * 2
+            total_height: float = self._grid_height + self._border_size * 2
 
             self._maze_x = (
                 self._maze_size - total_width
@@ -173,7 +172,7 @@ class Window:
 
             return
 
-        scale: float = (self._maze_size / reference_canvas_size)
+        scale: float = self._maze_size / reference_canvas_size
 
         self._cell_size = reference_cell_size * scale
 
@@ -182,8 +181,8 @@ class Window:
         self._grid_width = columns * self._cell_size
         self._grid_height = rows * self._cell_size
 
-        total_width: float = (self._grid_width + self._border_size * 2)
-        total_height: float = (self._grid_height - self._border_size * 2)
+        total_width: float = self._grid_width + self._border_size * 2
+        total_height: float = self._grid_height - self._border_size * 2
 
         self._maze_x = (self._maze_size - total_width) / 2
         self._maze_y = (self._maze_size - total_height) / 2
@@ -346,12 +345,8 @@ class Window:
 
         for row in self.maze.grid:
             for cell in row:
-                x: int = int(
-                    self._maze_x + cell.column * self._cell_size
-                )
-                y: int = int(
-                    self._maze_y + cell.row * self._cell_size
-                )
+                x: int = int(self._maze_x + cell.column * self._cell_size)
+                y: int = int(self._maze_y + cell.row * self._cell_size)
                 size: int = int(self._cell_size)
 
                 if cell.north:
@@ -437,12 +432,7 @@ class Window:
         x: int = self.maze_size + 30
 
         self._mlx.mlx_string_put(
-            self._mlx_ptr,
-            self._win_ptr,
-            x,
-            55,
-            self.TEXT_COLOR,
-            "A-MAZE-ING"
+            self._mlx_ptr, self._win_ptr, x, 55, self.TEXT_COLOR, "A-MAZE-ING"
         )
 
         self._mlx.mlx_string_put(
@@ -469,7 +459,7 @@ class Window:
             x,
             220,
             self.TEXT_COLOR,
-            "P Show / hide path"
+            "P Show / hide path",
         )
 
         self._mlx.mlx_string_put(
