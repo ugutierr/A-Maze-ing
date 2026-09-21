@@ -5,9 +5,9 @@ from typing import Any
 
 from pydantic import ValidationError
 
-from amz.config import get_config
-from amz.mazegen import Maze, MazeGenerator
-from amz.render import Window
+from config import get_config
+from mazegen import Maze, MazeGenerator
+from render import Window
 
 WINDOW_TITLE: str = "A-maze-ing"
 

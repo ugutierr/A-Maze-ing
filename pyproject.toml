@@ -3,9 +3,9 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "amz"
+name = "mazegen"
 version = "0.1.0"
-description = "Add your description here"
+description = "Maze generation module."
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
@@ -21,4 +21,4 @@ dev = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/amz"]
+packages = ["src/mazegen"]

@@ -1,9 +1,11 @@
-from dotenv import load_dotenv
 import os
-from pydantic import BaseModel, field_validator, Field, model_validator
-from typing import Annotated, Any, Self
 from enum import Enum
-from amz.mazegen import AlgorithmType
+from typing import Annotated, Any, Self
+
+from dotenv import load_dotenv
+from pydantic import BaseModel, Field, field_validator, model_validator
+
+from mazegen import AlgorithmType
 
 
 class DisplayModeType(str, Enum):
