@@ -9,6 +9,7 @@ description = "Maze generation module."
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "mlx",
     "pydantic>=2.13.5",
     "python-dotenv>=1.2.3",
 ]
@@ -22,3 +23,6 @@ dev = [
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/mazegen"]
+
+[tool.uv.sources]
+mlx = { path = "lib/mlx-2.2-py3-none-any.whl" }
