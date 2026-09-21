@@ -1,9 +1,8 @@
-import os
 from enum import Enum
 from pathlib import Path
 from typing import Annotated, Any, Self
 
-from dotenv import load_dotenv
+from dotenv import dotenv_values
 from pydantic import BaseModel, Field, field_validator, model_validator
 
 from mazegen import AlgorithmType
@@ -78,7 +77,9 @@ class Config(BaseModel):
         return self
 
 
-def load_config(config_file: str) -> None:
+def load_config(
+    config_file: str, required_keys: set[str], optional_keys: set[str]
+) -> dict[str, str | None]:
     path = Path(config_file)
 
     if not path.exists():
@@ -88,7 +89,7 @@ def load_config(config_file: str) -> None:
         raise ConfigError(f"Configuration path is not a file: {path}")
 
     try:
-        load_dotenv(path)
+        config = dotenv_values(path)
 
     except PermissionError as e:
         raise ConfigError(
@@ -103,24 +104,44 @@ def load_config(config_file: str) -> None:
             f"Cannot read configuration file: {path}: {e}"
         ) from e
 
+    normilized = {}
+    for key, value in config.items():
+        normilized_key = key.lower()
+        if normilized_key in normilized:
+            raise ConfigError(f"Duplicate configuration key: {key!r}")
+        normilized[normilized_key] = value
+
+    missing = required_keys - normilized.keys()
+    if missing:
+        raise ConfigError(
+            f"Missing configuration variables: {', '.join(sorted(missing))}"
+        )
+
+    unrecognised = (required_keys | optional_keys) - normilized.keys()
+    if unrecognised:
+        raise ConfigError(
+            "Unrecognised configuration variables: "
+            f"{', '.join(sorted(unrecognised))}"
+        )
+
+    return normilized
+
 
 def get_config(config_file: str) -> Config:
-    config_keys = [
-        "WIDTH",
-        "HEIGHT",
-        "ENTRY",
-        "EXIT",
-        "OUTPUT_FILE",
-        "PERFECT",
-        "SEED",
-        "ALGORITHM",
-        "DISPLAY_MODE",
-    ]
-    config_dic: dict[Any, Any] = {}
-    load_dotenv(config_file)
-    for key in config_keys:
-        config_dic[key.lower()] = os.getenv(key)
-        if not config_dic[key.lower()]:
-            config_dic[key.lower()] = os.getenv(key.lower())
-    config = Config(**config_dic)
+    required_keys = {
+        "width",
+        "height",
+        "entry",
+        "exit",
+        "output_file",
+        "perfect",
+    }
+
+    optional_keys = {
+        "seed",
+        "algorithm",
+        "display_mode",
+    }
+    config_dic = load_config(config_file, required_keys, optional_keys)
+    config = Config.model_validate(config_dic)
     return config
