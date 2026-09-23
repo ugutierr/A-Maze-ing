@@ -41,6 +41,8 @@ class Config(BaseModel):
     @classmethod
     def parse_word(cls, value: Any) -> Any:
         if isinstance(value, str):
+            if value == "":
+                return None
             return value.upper()
         return value
 

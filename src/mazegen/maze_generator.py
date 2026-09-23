@@ -38,31 +38,44 @@ class MazeGenerator:
                 raise ValueError("Could no determine generator algorithm")
 
     def _gen_42logo(self, maze: Maze) -> None:
-        x, y = maze.width // 2, maze.height // 2
-        logo4 = [
-            (x - 1, y),
-            (x - 2, y),
-            (x - 3, y),
-            (x + 3, y + 1),
-            (x + 3, y + 2),
-            (x + 1, y - 1),
-            (x + 1, y - 2),
-        ]
-        logo2 = [
-            (x + 3, y),
-            (x + 2, y),
-            (x + 1, y),
-            (x + 3, y + 2),
-            (x + 2, y + 2),
-            (x + 1, y + 2),
-            (x + 3, y - 2),
-            (x + 2, y - 2),
-            (x + 1, y - 2),
-            (x + 1, y - 1),
-            (x + 3, y + 1),
-        ]
-        for i, j in logo4 + logo2:
-            maze.grid[j][i].logo42 = True
+        pattern: tuple[str, ...] = (
+            "#...###",
+            "#.....#",
+            "###.###",
+            "..#.#..",
+            "..#.###",
+        )
+
+        pattern_height: int = len(pattern)
+        pattern_width: int = len(pattern[0])
+
+        center_x: int = maze.width // 2
+        center_y: int = maze.height // 2
+
+        start_x: int = center_x - pattern_width // 2
+        start_y: int = center_y - pattern_height // 2
+
+        if (
+            start_x < 0
+            or start_y < 0
+            or start_x + pattern_width > maze.width
+            or start_y + pattern_height > maze.height
+        ):
+            print("Error: maze is too small to diaplay the 42 pattern.")
+            return
+
+        for pattern_row, line in enumerate(pattern):
+            for pattern_column, value in enumerate(line):
+                if value != "#":
+                    continue
+
+                column: int = start_x + pattern_column
+                row: int = start_y + pattern_row
+
+                if column == center_x and row == center_y:
+                    continue
+
+                maze.grid[row][column].logo42 = True
 
     def _dfs_generator(self, maze: Maze) -> None:
         start = random.choice(random.choice(maze.grid))

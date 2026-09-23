@@ -500,3 +500,359 @@ output_file
 perfect
   Input should be a valid boolean [type=bool_type, input_value=None, input_type=NoneType]
     For further information visit https://errors.pydantic.dev/2.13/v/bool_type
+2026-09-23 09:20:01,781 | ERROR: Invalid configuration: | a_maze_ing.py:78
+Traceback (most recent call last):
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 76, in main
+    config = get_config(config_file)
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/config.py", line 146, in get_config
+    config = Config.model_validate(config_dic)
+  File "/home/cdiaz-to/cursus/a-maze-ing/.venv/lib/python3.13/site-packages/pydantic/main.py", line 732, in model_validate
+    return cls.__pydantic_validator__.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        obj,
+        ^^^^
+    ...<5 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+pydantic_core._pydantic_core.ValidationError: 2 validation errors for Config
+algorithm
+  Input should be 'DFS', 'PRIM' or 'PACMAN' [type=enum, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/enum
+display_mode
+  Input should be an instance of DisplayModeType [type=is_instance_of, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+2026-09-23 09:20:01,786 | ERROR:   Input should be 'DFS', 'PRIM' or 'PACMAN' | a_maze_ing.py:80
+Traceback (most recent call last):
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 76, in main
+    config = get_config(config_file)
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/config.py", line 146, in get_config
+    config = Config.model_validate(config_dic)
+  File "/home/cdiaz-to/cursus/a-maze-ing/.venv/lib/python3.13/site-packages/pydantic/main.py", line 732, in model_validate
+    return cls.__pydantic_validator__.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        obj,
+        ^^^^
+    ...<5 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+pydantic_core._pydantic_core.ValidationError: 2 validation errors for Config
+algorithm
+  Input should be 'DFS', 'PRIM' or 'PACMAN' [type=enum, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/enum
+display_mode
+  Input should be an instance of DisplayModeType [type=is_instance_of, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+2026-09-23 09:20:01,786 | ERROR:   Input should be an instance of DisplayModeType | a_maze_ing.py:80
+Traceback (most recent call last):
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 76, in main
+    config = get_config(config_file)
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/config.py", line 146, in get_config
+    config = Config.model_validate(config_dic)
+  File "/home/cdiaz-to/cursus/a-maze-ing/.venv/lib/python3.13/site-packages/pydantic/main.py", line 732, in model_validate
+    return cls.__pydantic_validator__.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        obj,
+        ^^^^
+    ...<5 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+pydantic_core._pydantic_core.ValidationError: 2 validation errors for Config
+algorithm
+  Input should be 'DFS', 'PRIM' or 'PACMAN' [type=enum, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/enum
+display_mode
+  Input should be an instance of DisplayModeType [type=is_instance_of, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+2026-09-23 09:32:29,070 | ERROR: Invalid configuration: | a_maze_ing.py:78
+Traceback (most recent call last):
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 76, in main
+    config = get_config(config_file)
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/config.py", line 146, in get_config
+    config = Config.model_validate(config_dic)
+  File "/home/cdiaz-to/cursus/a-maze-ing/.venv/lib/python3.13/site-packages/pydantic/main.py", line 732, in model_validate
+    return cls.__pydantic_validator__.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        obj,
+        ^^^^
+    ...<5 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+pydantic_core._pydantic_core.ValidationError: 2 validation errors for Config
+algorithm
+  Input should be 'DFS', 'PRIM' or 'PACMAN' [type=enum, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/enum
+display_mode
+  Input should be an instance of DisplayModeType [type=is_instance_of, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+2026-09-23 09:32:29,071 | ERROR:   Input should be 'DFS', 'PRIM' or 'PACMAN' | a_maze_ing.py:80
+Traceback (most recent call last):
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 76, in main
+    config = get_config(config_file)
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/config.py", line 146, in get_config
+    config = Config.model_validate(config_dic)
+  File "/home/cdiaz-to/cursus/a-maze-ing/.venv/lib/python3.13/site-packages/pydantic/main.py", line 732, in model_validate
+    return cls.__pydantic_validator__.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        obj,
+        ^^^^
+    ...<5 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+pydantic_core._pydantic_core.ValidationError: 2 validation errors for Config
+algorithm
+  Input should be 'DFS', 'PRIM' or 'PACMAN' [type=enum, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/enum
+display_mode
+  Input should be an instance of DisplayModeType [type=is_instance_of, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+2026-09-23 09:32:29,072 | ERROR:   Input should be an instance of DisplayModeType | a_maze_ing.py:80
+Traceback (most recent call last):
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 76, in main
+    config = get_config(config_file)
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/config.py", line 146, in get_config
+    config = Config.model_validate(config_dic)
+  File "/home/cdiaz-to/cursus/a-maze-ing/.venv/lib/python3.13/site-packages/pydantic/main.py", line 732, in model_validate
+    return cls.__pydantic_validator__.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        obj,
+        ^^^^
+    ...<5 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+pydantic_core._pydantic_core.ValidationError: 2 validation errors for Config
+algorithm
+  Input should be 'DFS', 'PRIM' or 'PACMAN' [type=enum, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/enum
+display_mode
+  Input should be an instance of DisplayModeType [type=is_instance_of, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+2026-09-23 09:32:50,437 | ERROR: Invalid configuration: | a_maze_ing.py:78
+Traceback (most recent call last):
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 76, in main
+    config = get_config(config_file)
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/config.py", line 146, in get_config
+    config = Config.model_validate(config_dic)
+  File "/home/cdiaz-to/cursus/a-maze-ing/.venv/lib/python3.13/site-packages/pydantic/main.py", line 732, in model_validate
+    return cls.__pydantic_validator__.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        obj,
+        ^^^^
+    ...<5 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+pydantic_core._pydantic_core.ValidationError: 2 validation errors for Config
+algorithm
+  Input should be 'DFS', 'PRIM' or 'PACMAN' [type=enum, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/enum
+display_mode
+  Input should be an instance of DisplayModeType [type=is_instance_of, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+2026-09-23 09:32:50,438 | ERROR:   Input should be 'DFS', 'PRIM' or 'PACMAN' | a_maze_ing.py:80
+Traceback (most recent call last):
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 76, in main
+    config = get_config(config_file)
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/config.py", line 146, in get_config
+    config = Config.model_validate(config_dic)
+  File "/home/cdiaz-to/cursus/a-maze-ing/.venv/lib/python3.13/site-packages/pydantic/main.py", line 732, in model_validate
+    return cls.__pydantic_validator__.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        obj,
+        ^^^^
+    ...<5 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+pydantic_core._pydantic_core.ValidationError: 2 validation errors for Config
+algorithm
+  Input should be 'DFS', 'PRIM' or 'PACMAN' [type=enum, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/enum
+display_mode
+  Input should be an instance of DisplayModeType [type=is_instance_of, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+2026-09-23 09:32:50,438 | ERROR:   Input should be an instance of DisplayModeType | a_maze_ing.py:80
+Traceback (most recent call last):
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 76, in main
+    config = get_config(config_file)
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/config.py", line 146, in get_config
+    config = Config.model_validate(config_dic)
+  File "/home/cdiaz-to/cursus/a-maze-ing/.venv/lib/python3.13/site-packages/pydantic/main.py", line 732, in model_validate
+    return cls.__pydantic_validator__.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        obj,
+        ^^^^
+    ...<5 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+pydantic_core._pydantic_core.ValidationError: 2 validation errors for Config
+algorithm
+  Input should be 'DFS', 'PRIM' or 'PACMAN' [type=enum, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/enum
+display_mode
+  Input should be an instance of DisplayModeType [type=is_instance_of, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+2026-09-23 11:02:25,057 | ERROR: Invalid configuration: | a_maze_ing.py:78
+Traceback (most recent call last):
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 76, in main
+    config = get_config(config_file)
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/config.py", line 146, in get_config
+    config = Config.model_validate(config_dic)
+  File "/home/cdiaz-to/cursus/a-maze-ing/.venv/lib/python3.13/site-packages/pydantic/main.py", line 732, in model_validate
+    return cls.__pydantic_validator__.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        obj,
+        ^^^^
+    ...<5 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+pydantic_core._pydantic_core.ValidationError: 2 validation errors for Config
+algorithm
+  Input should be 'DFS', 'PRIM' or 'PACMAN' [type=enum, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/enum
+display_mode
+  Input should be an instance of DisplayModeType [type=is_instance_of, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+2026-09-23 11:02:25,058 | ERROR:   Input should be 'DFS', 'PRIM' or 'PACMAN' | a_maze_ing.py:80
+Traceback (most recent call last):
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 76, in main
+    config = get_config(config_file)
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/config.py", line 146, in get_config
+    config = Config.model_validate(config_dic)
+  File "/home/cdiaz-to/cursus/a-maze-ing/.venv/lib/python3.13/site-packages/pydantic/main.py", line 732, in model_validate
+    return cls.__pydantic_validator__.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        obj,
+        ^^^^
+    ...<5 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+pydantic_core._pydantic_core.ValidationError: 2 validation errors for Config
+algorithm
+  Input should be 'DFS', 'PRIM' or 'PACMAN' [type=enum, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/enum
+display_mode
+  Input should be an instance of DisplayModeType [type=is_instance_of, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+2026-09-23 11:02:25,059 | ERROR:   Input should be an instance of DisplayModeType | a_maze_ing.py:80
+Traceback (most recent call last):
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 76, in main
+    config = get_config(config_file)
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/config.py", line 146, in get_config
+    config = Config.model_validate(config_dic)
+  File "/home/cdiaz-to/cursus/a-maze-ing/.venv/lib/python3.13/site-packages/pydantic/main.py", line 732, in model_validate
+    return cls.__pydantic_validator__.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        obj,
+        ^^^^
+    ...<5 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+pydantic_core._pydantic_core.ValidationError: 2 validation errors for Config
+algorithm
+  Input should be 'DFS', 'PRIM' or 'PACMAN' [type=enum, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/enum
+display_mode
+  Input should be an instance of DisplayModeType [type=is_instance_of, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+2026-09-23 11:08:53,567 | ERROR: Invalid configuration: | a_maze_ing.py:78
+Traceback (most recent call last):
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 76, in main
+    config = get_config(config_file)
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/config.py", line 146, in get_config
+    config = Config.model_validate(config_dic)
+  File "/home/cdiaz-to/cursus/a-maze-ing/.venv/lib/python3.13/site-packages/pydantic/main.py", line 732, in model_validate
+    return cls.__pydantic_validator__.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        obj,
+        ^^^^
+    ...<5 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Config
+display_mode
+  Input should be an instance of DisplayModeType [type=is_instance_of, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+2026-09-23 11:08:53,569 | ERROR:   Input should be an instance of DisplayModeType | a_maze_ing.py:80
+Traceback (most recent call last):
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 76, in main
+    config = get_config(config_file)
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/config.py", line 146, in get_config
+    config = Config.model_validate(config_dic)
+  File "/home/cdiaz-to/cursus/a-maze-ing/.venv/lib/python3.13/site-packages/pydantic/main.py", line 732, in model_validate
+    return cls.__pydantic_validator__.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        obj,
+        ^^^^
+    ...<5 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Config
+display_mode
+  Input should be an instance of DisplayModeType [type=is_instance_of, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+2026-09-23 11:52:58,886 | ERROR: Invalid configuration: | a_maze_ing.py:78
+Traceback (most recent call last):
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 76, in main
+    config = get_config(config_file)
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/config.py", line 148, in get_config
+    config = Config.model_validate(config_dic)
+  File "/home/cdiaz-to/cursus/a-maze-ing/.venv/lib/python3.13/site-packages/pydantic/main.py", line 732, in model_validate
+    return cls.__pydantic_validator__.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        obj,
+        ^^^^
+    ...<5 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Config
+height
+  Input should be greater than or equal to 9 [type=greater_than_equal, input_value='8', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/greater_than_equal
+2026-09-23 11:52:58,888 | ERROR:   Input should be greater than or equal to 9 | a_maze_ing.py:80
+Traceback (most recent call last):
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 76, in main
+    config = get_config(config_file)
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/config.py", line 148, in get_config
+    config = Config.model_validate(config_dic)
+  File "/home/cdiaz-to/cursus/a-maze-ing/.venv/lib/python3.13/site-packages/pydantic/main.py", line 732, in model_validate
+    return cls.__pydantic_validator__.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        obj,
+        ^^^^
+    ...<5 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Config
+height
+  Input should be greater than or equal to 9 [type=greater_than_equal, input_value='8', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/greater_than_equal
