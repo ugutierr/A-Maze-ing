@@ -11,7 +11,7 @@ class Window:
     PATH_KEYCODE: int = 112
     COLOR_KEYCODE: int = 99
 
-    CLOSE_EVENT: int = 17
+    CLOSE_EVENT: int = 33
 
     BACKGROUND_COLOR: int = 0x101014
     PANEL_COLOR: int = 0x18181F
@@ -105,7 +105,8 @@ class Window:
 
         self._closed = True
 
-        self._mlx.mlx_destroy_window(self._mlx_ptr, self._mlx_ptr)
+        self._mlx.mlx_loop_exit(self._mlx_ptr)
+        self._mlx.mlx_destroy_window(self._mlx_ptr, self._win_ptr)
         self._mlx.mlx_release(self._mlx_ptr)
 
     def _get_window_size(self) -> tuple[int, int]:
