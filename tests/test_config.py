@@ -14,6 +14,14 @@ from config import Config
         ((10, 9, "0, 0", "1, 1", "maze_test.txt", True, None, None, None)),
         ((11, 8, "0, 0", "1, 1", "maze_test.txt", True, None, None, None)),
         ((11, 9, "9, 11", "1, 1", "maze_test.txt", True, None, None, None)),
+        ((15, 15, "1, 1", "1, 1", "maze_test.txt", True, None, None, None)),
+        ((15, 15, "0, 1", "", "maze_test.txt", True, None, None, None)),
+        ((15, 15, "0, 1", "1, 1", "", True, None, None, None)),
+        ((15, 15, "0, 1", "1, 1", "lskdjf", True, None, None, None)),
+        ((0, 15, "0, 1", "1, 1", "True", True, None, None, None)),
+        ((-15, 15, "0, 1", "1, 1", "True", True, None, None, None)),
+        ((15, 15, "0, 1", "1, 1", "True", True, None, None, None)),
+        ((15, 15, "0, 1", "1, 1", "True", True, None, None, None)),
         ((20, 15, "0, 0", "20, 1", "maze_test.txt", True, None, None, None)),
         (
             (

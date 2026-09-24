@@ -12,6 +12,8 @@
 
 CONFIG ?= config.example.txt
 
+OUTPUT_FILE ?= maze.txt
+
 MYPY_FLAGS = \
 	--warn-return-any \
 	--warn-unused-ignores \
@@ -42,8 +44,12 @@ build:
 
 
 test: install
+	@echo "Running test..."
 	@uv run pytest tests/
-	@uv run python3 tests/maze_analyzer.py maze.txt 
+
+analyze:
+	@echo "Analyzing $(OUTPUT_FILE)..."
+	@uv run python3 tests/maze_analyzer.py $(OUTPUT_FILE)
 
 debug: install
 	@echo "Running a_maze_ing.py...\n"
