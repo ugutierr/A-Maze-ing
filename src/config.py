@@ -37,7 +37,7 @@ class Config(BaseModel):
             return tuple(map(int, value.split(",")))
         return value
 
-    @field_validator("algorithm", "display_mode", mode="before")
+    @field_validator("output_file", "algorithm", "display_mode", mode="before")
     @classmethod
     def parse_word(cls, value: Any) -> Any:
         if isinstance(value, str):
