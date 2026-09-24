@@ -44,7 +44,7 @@ class Window:
         self._mlx_ptr = self._mlx.mlx_init()
 
         if self._mlx_ptr is None:
-            raise RuntimeError("Filed to initialise MLX")
+            raise RuntimeError("Failed to initialise MLX")
 
         self.width, self.height = self._get_window_size()
         self._maze_size = self.height
