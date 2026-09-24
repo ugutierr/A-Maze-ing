@@ -61,8 +61,9 @@ class MazeGenerator:
             or start_x + pattern_width > maze.width
             or start_y + pattern_height > maze.height
         ):
-            print("Error: maze is too small to diaplay the 42 pattern.")
-            return
+            raise ValueError(
+                "Error: maze is too small to diaplay the 42 pattern."
+            )
 
         for pattern_row, line in enumerate(pattern):
             for pattern_column, value in enumerate(line):

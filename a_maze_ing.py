@@ -90,7 +90,10 @@ def main() -> int:
     )
     maze = Maze(**maze_config)
     mazegen = MazeGenerator(**mazegen_config)
-    mazegen.generate(maze)
+    try:
+        mazegen.generate(maze)
+    except ValueError as e:
+        logger.exception(f"Unable to generate maze: {e}")
 
     try:
         gen_output_file(config.output_file, maze)
