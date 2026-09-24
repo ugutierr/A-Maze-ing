@@ -81,7 +81,9 @@ kill:
 
 clean:
 	@echo "Cleaning project..."
-	@find . -type d \( -name "__pycache__" -o -name ".mypy_cache" \) \
+	@find . -type d \( -name "__pycache__" \
+		-o -name ".mypy_cache" \
+		-o -name ".pytest_cache" \) \
   -not -path "./.venv/*" -prune -exec rm -rf {} +
 	@rm -f maze.txt
 	@rm -rf dist/
