@@ -1,5 +1,6 @@
 import logging
 from collections import deque
+from enum import Enum
 
 logger = logging.getLogger(__name__)
 
@@ -23,6 +24,23 @@ class Cell:
         return 4 - sum((bit >> i) & 1 for i in range(4))
 
 
+class Direction(Enum):
+    NORTH = "N"
+    EAST = "E"
+    SOUTH = "S"
+    WEST = "W"
+
+
+class WallRemovalEvent:
+    def __init__(
+        self, c1: Cell, w1: Direction, c2: Cell, w2: Direction
+    ) -> None:
+        self.cell1 = (c1.column, c1.row)
+        self.cell2 = (c2.column, c2.row)
+        self.wall1 = w1
+        self.wall2 = w2
+
+
 class Maze:
     def __init__(
         self,
@@ -41,6 +59,7 @@ class Maze:
         ]
         self.entry_cell = self.grid[self.entry[1]][self.entry[0]]
         self.exit_cell = self.grid[self.exit[1]][self.exit[0]]
+        self.history: list[WallRemovalEvent] = []
 
     def get_bitmap(self) -> str:
         return "\n".join(
@@ -112,15 +131,31 @@ class Maze:
         if cell2 == self.north_cell(cell1):
             cell1.north = False
             cell2.south = False
+            self.history.append(
+                WallRemovalEvent(
+                    cell1, Direction.NORTH, cell2, Direction.SOUTH
+                )
+            )
         elif cell2 == self.east_cell(cell1):
             cell1.east = False
             cell2.west = False
+            self.history.append(
+                WallRemovalEvent(cell1, Direction.EAST, cell2, Direction.WEST)
+            )
         elif cell2 == self.south_cell(cell1):
             cell1.south = False
             cell2.north = False
+            self.history.append(
+                WallRemovalEvent(
+                    cell1, Direction.SOUTH, cell2, Direction.NORTH
+                )
+            )
         elif cell2 == self.west_cell(cell1):
             cell1.west = False
             cell2.east = False
+            self.history.append(
+                WallRemovalEvent(cell1, Direction.WEST, cell2, Direction.EAST)
+            )
         else:
             raise ValueError(
                 "Cannot remove walls between non neighboring cells"
