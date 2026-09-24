@@ -19,9 +19,9 @@ MYPY_FLAGS = \
 	--disallow-untyped-defs \
 	--check-untyped-defs
 
-MYPY_EXCLUDE = --exclude '(^|/)mlx|.venv/'
+MYPY_EXCLUDE = --exclude '(^|/).venv/'
 
-FLAKE8_FLAGS = --exclude=mlx,.venv
+FLAKE8_FLAGS = --exclude=.venv
 
 
 
