@@ -1,7 +1,9 @@
-import pytest
 from typing import Any
+
+import pytest
 from pydantic import ValidationError
-from amz.config import Config
+
+from config import Config
 
 
 @pytest.mark.parametrize(

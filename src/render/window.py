@@ -1,8 +1,8 @@
 import math
 
-
-from src.mazegen import Maze, MazeGenerator
 from mlx import Mlx
+
+from mazegen import Maze, MazeGenerator
 
 
 class Window:
@@ -114,8 +114,8 @@ class Window:
         screen_width: int
         screen_height: int
 
-        result, screen_width, screen_height = (
-            self._mlx.mlx_get_screen_size(self._mlx_ptr)
+        result, screen_width, screen_height = self._mlx.mlx_get_screen_size(
+            self._mlx_ptr
         )
 
         if result != 0:
@@ -124,8 +124,8 @@ class Window:
         if screen_width <= 0 or screen_height <= 0:
             raise RuntimeError("Invalid screen size")
 
-        scale_x: float = (screen_width / self.REFERENCE_SCREEN_WIDTH)
-        scale_y: float = (screen_height / self.REFERENCE_SCREEN_HEIGHT)
+        scale_x: float = screen_width / self.REFERENCE_SCREEN_WIDTH
+        scale_y: float = screen_height / self.REFERENCE_SCREEN_HEIGHT
 
         scale: float = min(scale_x, scale_y)
 
@@ -161,16 +161,12 @@ class Window:
         self._grid_width = columns * self._cell_size
         self._grid_height = rows * self._cell_size
 
-        total_width: float = (self._grid_width + self._border_size * 2)
-        total_height: float = (self._grid_height + self._border_size * 2)
+        total_width: float = self._grid_width + self._border_size * 2
+        total_height: float = self._grid_height + self._border_size * 2
 
-        self._maze_x = (
-            self._maze_size - total_width
-        ) / 2 + self._border_size
+        self._maze_x = (self._maze_size - total_width) / 2 + self._border_size
 
-        self._maze_y = (
-            self._maze_size - total_height
-        ) / 2 + self._border_size
+        self._maze_y = (self._maze_size - total_height) / 2 + self._border_size
 
     def _register_events(self) -> None:
         self._mlx.mlx_key_hook(
@@ -427,12 +423,7 @@ class Window:
         x: int = self._maze_size + 30
 
         self._mlx.mlx_string_put(
-            self._mlx_ptr,
-            self._win_ptr,
-            x,
-            55,
-            self.TEXT_COLOR,
-            "A-MAZE-ING"
+            self._mlx_ptr, self._win_ptr, x, 55, self.TEXT_COLOR, "A-MAZE-ING"
         )
 
         self._mlx.mlx_string_put(
@@ -459,7 +450,7 @@ class Window:
             x,
             220,
             self.TEXT_COLOR,
-            "P Show / hide path"
+            "P Show / hide path",
         )
 
         self._mlx.mlx_string_put(
