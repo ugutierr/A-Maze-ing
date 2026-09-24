@@ -896,3 +896,6 @@ pydantic_core._pydantic_core.ValidationError: 1 validation error for Config
 output_file
   Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
     For further information visit https://errors.pydantic.dev/2.13/v/string_type
+2026-09-24 16:50:22,884 | DEBUG: Generating maze... | a_maze_ing.py:94
+2026-09-24 16:52:54,332 | DEBUG: ANTES DE CREAR WINDOW | a_maze_ing.py:116
+2026-09-24 16:52:54,464 | DEBUG: WINDOW CREADA | a_maze_ing.py:122

@@ -113,13 +113,13 @@ def main() -> int:
         return 1
 
     try:
-        print("ANTES DE CREAR WINDOW")
+        logger.debug("ANTES DE CREAR WINDOW")
         window = Window(
             WINDOW_TITLE,
             maze,
             mazegen,
         )
-        print("WINDOW CREADA")
+        logger.debug("WINDOW CREADA")
         window.run()
     except RuntimeError as error:
         logger.exception(f"Graphics error: {error}")
