@@ -23,19 +23,17 @@ MYPY_EXCLUDE = --exclude '(^|/)mlx|.venv/'
 
 FLAKE8_FLAGS = --exclude=mlx,.venv
 
-MODULE = mazegen-1.0.0-py3-none-any.whl
 
 
 
-
-install: $(MODULE)
+install: build
 	@uv sync
 	@echo "Installation complete."
 
 run: install
 	@uv run python3 a_maze_ing.py $(CONFIG)
 
-$(MODULE):
+build:
 	@echo "Building project..."
 	@uv build
 	@echo "Build complete."
