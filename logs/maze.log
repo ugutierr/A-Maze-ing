@@ -899,3 +899,39 @@ output_file
 2026-09-24 16:50:22,884 | DEBUG: Generating maze... | a_maze_ing.py:94
 2026-09-24 16:52:54,332 | DEBUG: ANTES DE CREAR WINDOW | a_maze_ing.py:116
 2026-09-24 16:52:54,464 | DEBUG: WINDOW CREADA | a_maze_ing.py:122
+2026-10-01 20:40:16,860 | DEBUG: ANTES DE CREAR WINDOW | a_maze_ing.py:116
+2026-10-01 20:40:17,106 | DEBUG: WINDOW CREADA | a_maze_ing.py:122
+2026-10-01 20:57:21,457 | DEBUG: ANTES DE CREAR WINDOW | a_maze_ing.py:116
+2026-10-01 20:57:29,901 | ERROR: Unexpected error: | a_maze_ing.py:138
+Traceback (most recent call last):
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 133, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 117, in main
+    window = Window(
+        WINDOW_TITLE,
+        maze,
+        mazegen,
+    )
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/render/window.py", line 135, in __init__
+    self._draw()
+    ~~~~~~~~~~^^
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/render/window.py", line 310, in _draw
+    self._draw_cells()
+    ~~~~~~~~~~~~~~~~^^
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/render/window.py", line 382, in _draw_cells
+    self._maze.entry_cell.column,
+    ^^^^^^^^^^
+AttributeError: 'Window' object has no attribute '_maze'. Did you mean: 'maze'?
+2026-10-01 21:11:06,559 | DEBUG: ANTES DE CREAR WINDOW | a_maze_ing.py:116
+2026-10-01 21:11:07,002 | DEBUG: WINDOW CREADA | a_maze_ing.py:122
+2026-10-01 21:47:02,185 | DEBUG: ANTES DE CREAR WINDOW | a_maze_ing.py:116
+2026-10-01 21:47:02,692 | DEBUG: WINDOW CREADA | a_maze_ing.py:122
+2026-10-01 22:42:17,237 | DEBUG: ANTES DE CREAR WINDOW | a_maze_ing.py:116
+2026-10-01 22:42:17,434 | DEBUG: WINDOW CREADA | a_maze_ing.py:122
+2026-10-01 22:59:23,967 | DEBUG: ANTES DE CREAR WINDOW | a_maze_ing.py:116
+2026-10-01 22:59:24,166 | DEBUG: WINDOW CREADA | a_maze_ing.py:122
+2026-10-02 00:42:46,342 | DEBUG: ANTES DE CREAR WINDOW | a_maze_ing.py:116
+2026-10-02 00:42:47,834 | DEBUG: WINDOW CREADA | a_maze_ing.py:122
+2026-10-02 01:05:49,386 | DEBUG: ANTES DE CREAR WINDOW | a_maze_ing.py:116
+2026-10-02 01:05:49,651 | DEBUG: WINDOW CREADA | a_maze_ing.py:122

@@ -26,9 +26,9 @@ class Config(BaseModel):
     exit: tuple[NonNegativeInt, NonNegativeInt]
     output_file: str
     perfect: bool
-    seed: None | str
-    algorithm: AlgorithmType | None
-    display_mode: DisplayModeType | None
+    seed: None | str = None
+    algorithm: AlgorithmType | None = None
+    display_mode: DisplayModeType | None = None
 
     @field_validator("entry", "exit", mode="before")
     @classmethod
@@ -41,6 +41,13 @@ class Config(BaseModel):
     @classmethod
     def parse_output_file(cls, value: Any) -> Any:
         if value == "":
+            return None
+        return value
+
+    @field_validator("seed", mode="before")
+    @classmethod
+    def parse_seed(cls, value: Any) -> Any:
+        if isinstance(value, str) and value == "":
             return None
         return value
 
@@ -126,7 +133,7 @@ def load_config(
             f"Missing configuration variables: {', '.join(sorted(missing))}"
         )
 
-    unrecognised = (required_keys | optional_keys) - normilized.keys()
+    unrecognised = normilized.keys() - (required_keys | optional_keys)
     if unrecognised:
         raise ConfigError(
             "Unrecognised configuration variables: "
