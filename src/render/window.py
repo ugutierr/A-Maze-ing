@@ -1,9 +1,9 @@
 import math
-from typing import Literal
 from pathlib import Path
+from typing import Literal
 
 from mazegen import Maze, MazeGenerator
-from mlx import Mlx  # type: ignore[import-untyped]
+from mlx import Mlx
 
 
 ASSETS_DIR: Path = Path(__file__).resolve().parents[2] / "assets"
@@ -70,6 +70,8 @@ class Window:
         self._grid_height: float = 0.0
 
         self._stone_scaled_image: object | None = None
+        self._floor_scaled_image: object | None = None
+        self._entry_exit_scaled_image: object | None = None
         self._wall_vertical_image: object | None = None
         self._wall_horizontal_image: object | None = None
         self._brick_top_image: object | None = None
@@ -86,7 +88,7 @@ class Window:
         self._wall_overhang: int = 0
         self._show_path: bool = False
         self._wall_color: int | None = None
-
+        
         self._calculate_geometry()
         self._rebuild_scaled_images()
         self._register_events()
@@ -95,12 +97,22 @@ class Window:
 
     def _load_textures(self) -> None:
         stone_path: str = str(ASSETS_DIR / "stone.xpm")
+        floor_path: str = str(ASSETS_DIR / "floor.xpm")
         wall_path: str = str(ASSETS_DIR / "wall.xpm")
         brick_path: str = str(ASSETS_DIR / "brick.xpm")
+        entry_exit_path: str = str(ASSETS_DIR / "entry_exit.xpm")
 
         stone_result = self._mlx.mlx_xpm_file_to_image(
             self._mlx_ptr,
             stone_path,
+        )
+        floor_result = self._mlx.mlx_xpm_file_to_image(
+            self._mlx_ptr,
+            floor_path,
+        )
+        entry_exit_result = self._mlx.mlx_xpm_file_to_image(
+            self._mlx_ptr,
+            entry_exit_path,
         )
         wall_result = self._mlx.mlx_xpm_file_to_image(
             self._mlx_ptr,
@@ -113,6 +125,10 @@ class Window:
 
         if stone_result[0] is None:
             raise RuntimeError(f"Failed to load texture: {stone_path}")
+        if floor_result[0] is None:
+            raise RuntimeError(f"Failed to load texture: {floor_path}")
+        if entry_exit_result[0] is None:
+            raise RuntimeError(f"Failed to load texture: {entry_exit_path}")
         if wall_result[0] is None:
             raise RuntimeError(f"Failed to load texture: {wall_path}")
         if brick_result[0] is None:
@@ -121,6 +137,14 @@ class Window:
         self._stone_image = stone_result[0]
         self._stone_width = int(stone_result[1])
         self._stone_height = int(stone_result[2])
+
+        self._floor_image = floor_result[0]
+        self._floor_width = int(floor_result[1])
+        self._floor_height = int(floor_result[2])
+
+        self._entry_exit_image = entry_exit_result[0]
+        self._entry_exit_width = int(entry_exit_result[1])
+        self._entry_exit_height = int(entry_exit_result[2])
 
         self._wall_image = wall_result[0]
         self._wall_width = int(wall_result[1])
@@ -145,6 +169,14 @@ class Window:
         self._mlx.mlx_destroy_image(
             self._mlx_ptr,
             self._stone_image,
+        )
+        self._mlx.mlx_destroy_image(
+            self._mlx_ptr,
+            self._floor_image,
+        )
+        self._mlx.mlx_destroy_image(
+            self._mlx_ptr,
+            self._entry_exit_image,
         )
         self._mlx.mlx_destroy_image(
             self._mlx_ptr,
@@ -273,8 +305,12 @@ class Window:
             self._win_ptr,
         )
 
-        # Draw the 42 cells first so their images cannot cover the walls.
+        # Draw the floor first; 42 and entry/exit cells are intentionally skipped.
+        self._draw_floor()
+        # Draw the 42 cells next so their images cover the floor.
         self._draw_cells()
+        # Draw entry/exit of the maze, mark the start and the end.
+        self._draw_entry_exit()
         # Draw walls afterwards so every wall remains visible.
         self._draw_walls()
         # Bricks are a decorative outer frame and stay on top of the wall.
@@ -318,6 +354,26 @@ class Window:
 
         brick_size: int = cell_size
         brick_half_size: int = max(1, round(cell_size / 2))
+
+        self._floor_scaled_image = self._create_scaled_image(
+            self._floor_image,
+            self._floor_width,
+            self._floor_height,
+            cell_size,
+            cell_size,
+            False,
+            "floor",
+        )
+
+        self._entry_exit_scaled_image = self._create_scaled_image(
+            self._entry_exit_image,
+            self._entry_exit_width,
+            self._entry_exit_height,
+            cell_size,
+            cell_size,
+            False,
+            "entry/exit",
+        )
 
         self._stone_scaled_image = self._create_scaled_image(
             self._stone_image,
@@ -520,7 +576,7 @@ class Window:
 
         crop_width: int = max(1, round(source_width * crop_width_ratio))
         crop_height: int = max(1, round(source_height * crop_height_ratio))
-        crop_x_offset: int = round(
+        crop_x_offset : int = round(
             (source_width - crop_width) * crop_x_start_ratio
         )
         crop_y_offset: int = round(
@@ -617,6 +673,8 @@ class Window:
     def _destroy_scaled_images(self) -> None:
         scaled_images = (
             "_stone_scaled_image",
+            "_floor_scaled_image",
+            "_entry_exit_scaled_image",
             "_wall_vertical_image",
             "_wall_horizontal_image",
             "_brick_top_image",
@@ -655,6 +713,30 @@ class Window:
             round(y),
         )
 
+    def _draw_floor(self) -> None:
+        if self._floor_scaled_image is None:
+            return
+
+        entry: tuple[int, int] = self._maze.entry
+        exit: tuple[int, int] = self._maze.exit
+
+        for row in self._maze.grid:
+            for cell in row:
+                if cell.logo42:
+                    continue
+                if (cell.column, cell.row) == entry:
+                    continue
+                if (cell.column, cell.row) == exit:
+                    continue
+
+                x: float = self._maze_x + cell.column * self._cell_size
+                y: float = self._maze_y + cell.row * self._cell_size
+                self._put_image(
+                    self._floor_scaled_image,
+                    x,
+                    y,
+                )
+
     def _draw_cells(self) -> None:
         if self._stone_scaled_image is None:
             return
@@ -675,6 +757,39 @@ class Window:
                     x,
                     y,
                 )
+
+    def _draw_entry_exit(self) -> None:
+        if self._entry_exit_scaled_image is None:
+            return
+
+        entry_x: float = (
+            self._maze_x
+            + self._maze.entry[0] * self._cell_size
+        )
+        entry_y: float = (
+            self._maze_y
+            + self._maze.entry[1] * self._cell_size
+        )
+
+        exit_x: float = (
+            self._maze_y
+            + self._maze.exit[0] * self._cell_size
+        )
+        exit_y: float = (
+            self._maze_y
+            + self._maze.exit[1] * self._cell_size
+        )
+
+        self._put_image(
+            self._entry_exit_scaled_image,
+            entry_x,
+            entry_y,
+        )
+        self._put_image(
+            self._entry_exit_scaled_image,
+            exit_x,
+            exit_y,
+        )
 
     def _draw_walls(self) -> None:
         if (
@@ -717,7 +832,7 @@ class Window:
                         self._wall_horizontal_image,
                         x0,
                         y1 - self._wall_thickness / 2,
-                    )
+                    )       
 
     def _draw_solution_path(self) -> None:
         path: str = self._maze.shortest_path()
@@ -774,8 +889,8 @@ class Window:
 
         for column in range(self._maze.width):
             x: float = (
-                self._maze_x
-                + column * self._cell_size
+                self._maze_x 
+                + column * self._cell_size 
             )
             self._put_image(
                 self._brick_top_image,

@@ -935,3 +935,55 @@ AttributeError: 'Window' object has no attribute '_maze'. Did you mean: 'maze'?
 2026-10-02 00:42:47,834 | DEBUG: WINDOW CREADA | a_maze_ing.py:122
 2026-10-02 01:05:49,386 | DEBUG: ANTES DE CREAR WINDOW | a_maze_ing.py:116
 2026-10-02 01:05:49,651 | DEBUG: WINDOW CREADA | a_maze_ing.py:122
+2026-10-02 01:21:33,376 | DEBUG: ANTES DE CREAR WINDOW | a_maze_ing.py:116
+2026-10-02 01:21:33,775 | DEBUG: WINDOW CREADA | a_maze_ing.py:122
+2026-10-02 01:29:14,579 | DEBUG: ANTES DE CREAR WINDOW | a_maze_ing.py:116
+2026-10-02 01:29:14,952 | DEBUG: WINDOW CREADA | a_maze_ing.py:122
+2026-10-02 01:38:51,676 | DEBUG: ANTES DE CREAR WINDOW | a_maze_ing.py:116
+2026-10-02 01:38:51,987 | DEBUG: WINDOW CREADA | a_maze_ing.py:122
+2026-10-02 02:17:18,548 | DEBUG: ANTES DE CREAR WINDOW | a_maze_ing.py:116
+2026-10-02 02:17:18,656 | ERROR: Unexpected error: | a_maze_ing.py:138
+Traceback (most recent call last):
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 133, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 117, in main
+    window = Window(
+        WINDOW_TITLE,
+        maze,
+        mazegen,
+    )
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/render/window.py", line 61, in __init__
+    self._load_textures()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/render/window.py", line 103, in _load_textures
+    entry_exit_path: str = str(ASSETS / "entry_exit.xpm")
+                               ^^^^^^
+NameError: name 'ASSETS' is not defined
+2026-10-02 02:19:29,588 | DEBUG: ANTES DE CREAR WINDOW | a_maze_ing.py:116
+2026-10-02 02:19:29,679 | ERROR: Unexpected error: | a_maze_ing.py:138
+Traceback (most recent call last):
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 133, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 117, in main
+    window = Window(
+        WINDOW_TITLE,
+        maze,
+        mazegen,
+    )
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/render/window.py", line 93, in __init__
+    self._rebuild_scaled_images()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/cdiaz-to/cursus/a-maze-ing/src/render/window.py", line 368, in _rebuild_scaled_images
+    self._entry_exit_scaled_image = self._created_scaled_image(
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Window' object has no attribute '_created_scaled_image'. Did you mean: '_create_scaled_image'?
+2026-10-02 02:20:17,193 | DEBUG: ANTES DE CREAR WINDOW | a_maze_ing.py:116
+2026-10-02 02:20:17,523 | DEBUG: WINDOW CREADA | a_maze_ing.py:122
+2026-10-02 02:22:02,507 | DEBUG: ANTES DE CREAR WINDOW | a_maze_ing.py:116
+2026-10-02 02:22:02,862 | DEBUG: WINDOW CREADA | a_maze_ing.py:122
+2026-10-02 02:22:32,189 | DEBUG: ANTES DE CREAR WINDOW | a_maze_ing.py:116
+2026-10-02 02:22:32,498 | DEBUG: WINDOW CREADA | a_maze_ing.py:122
+2026-10-02 02:24:23,735 | DEBUG: ANTES DE CREAR WINDOW | a_maze_ing.py:116
+2026-10-02 02:24:24,105 | DEBUG: WINDOW CREADA | a_maze_ing.py:122
