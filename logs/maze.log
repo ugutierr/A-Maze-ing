@@ -987,3 +987,27 @@ AttributeError: 'Window' object has no attribute '_created_scaled_image'. Did yo
 2026-10-02 02:22:32,498 | DEBUG: WINDOW CREADA | a_maze_ing.py:122
 2026-10-02 02:24:23,735 | DEBUG: ANTES DE CREAR WINDOW | a_maze_ing.py:116
 2026-10-02 02:24:24,105 | DEBUG: WINDOW CREADA | a_maze_ing.py:122
+2026-10-25 18:22:06,143 | ERROR: Unexpected error: | a_maze_ing.py:137
+Traceback (most recent call last):
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 132, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 117, in main
+    window = Window(
+        WINDOW_TITLE,
+        maze,
+        mazegen,
+    )
+TypeError: Window.__init__() missing 1 required positional argument: 'config'
+2026-10-25 18:24:38,474 | ERROR: Unexpected error: | a_maze_ing.py:137
+Traceback (most recent call last):
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 132, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/home/cdiaz-to/cursus/a-maze-ing/a_maze_ing.py", line 117, in main
+    window = Window(
+        WINDOW_TITLE,
+        maze,
+        mazegen,
+    )
+TypeError: Window.__init__() missing 1 required positional argument: 'config'

@@ -62,18 +62,18 @@ class Config(BaseModel):
 
     @model_validator(mode="after")
     def check_algorithm(self) -> Self:
+        if self.algorithm is None:
+            self.algorithm = (
+                AlgorithmType.DFS if self.perfect else AlgorithmType.PACMAN
+            )
         if self.perfect and self.algorithm == AlgorithmType.PACMAN:
             raise ValueError(
                 "Incompatible requirements, PACMAN like and pefect maze"
             )
-        if not self.perfect and (
-            self.algorithm == AlgorithmType.DFS
-            or self.algorithm == AlgorithmType.PRIM
-        ):
+        if not self.perfect and self.algorithm != AlgorithmType.PACMAN:
             raise ValueError(
-                "Incompatible requirements, " + "DFS"
-                if self.algorithm == AlgorithmType.DFS
-                else "PRIM" + "and not a perfect maze"
+                f"Incompatible requirements, {self.algorithm.name} "
+                f"and a non-perfect maze"
             )
         return self
 

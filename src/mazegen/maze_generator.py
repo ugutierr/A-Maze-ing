@@ -12,7 +12,7 @@ class AlgorithmType(str, Enum):
 
 class MazeGenerator:
     def __init__(
-        self, seed: None | str, perfect: bool, algorithm: None | AlgorithmType
+        self, seed: None | str, perfect: bool, algorithm: AlgorithmType
     ) -> None:
         self.seed = seed
         self.perfect = perfect
@@ -22,20 +22,17 @@ class MazeGenerator:
         random.seed(self.seed)
         self._gen_42logo(maze)
         match (self.perfect, self.algorithm):
-            case (True, None | AlgorithmType.DFS) | (
-                None,
-                AlgorithmType.DFS,
-            ):
+            case (True, AlgorithmType.DFS):
                 self._dfs_generator(maze)
-            case (True, AlgorithmType.PRIM) | (
-                None,
-                AlgorithmType.PRIM,
-            ):
+            case (True, AlgorithmType.PRIM):
                 self._prim_generator(maze)
-            case (False, None | AlgorithmType.PACMAN):
+            case (False, AlgorithmType.PACMAN):
                 self._pacman_generator(maze)
             case _:
-                raise ValueError("Could no determine generator algorithm")
+                raise ValueError(
+                    f"Algorithm {self.algorithm} cannot generate a "
+                    f"{'perfect' if self.perfect else 'non-perfect'} maze"
+                )
 
     def _gen_42logo(self, maze: Maze) -> None:
         pattern: tuple[str, ...] = (

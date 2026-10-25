@@ -81,6 +81,7 @@ def main() -> int:
         return 1
     except ConfigError as e:
         logger.exception(e)
+        return 1
 
     maze_config = config.model_dump(
         include={"width", "height", "entry", "exit"}
@@ -113,13 +114,12 @@ def main() -> int:
         return 1
 
     try:
-        logger.debug("ANTES DE CREAR WINDOW")
         window = Window(
             WINDOW_TITLE,
             maze,
             mazegen,
+            config,
         )
-        logger.debug("WINDOW CREADA")
         window.run()
     except RuntimeError as error:
         logger.exception(f"Graphics error: {error}")
