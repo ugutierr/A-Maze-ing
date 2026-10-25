@@ -8,6 +8,7 @@ from typing import Literal
 from mazegen import Maze, MazeGenerator
 from mlx import Mlx
 from .animation import MazeAnimation
+from .bitmapfont import draw_text
 from .framebuffer import Surface
 from config import Config
 
@@ -76,6 +77,7 @@ class Window:
     PANEL_GRAPHIC_TOP_MARGIN: int = 15
     PANEL_GRAPHIC_LEFT_MARGIN: int = 15
     PANEL_DOG_AREA_SIZE: int = 145
+    ASSET_SCALE: float = 2.0
 
     def __init__(
         self,
@@ -825,6 +827,7 @@ class Window:
         self._draw_animated_dog()
         self._draw_panel_dog()
 
+        self._draw_panel_text()
         self._mlx.mlx_put_image_to_window(
             self._mlx_ptr,
             self._win_ptr,
@@ -832,7 +835,6 @@ class Window:
             0,
             0,
         )
-        self._draw_panel_text()
         # self._mlx.mlx_do_sync(self._mlx_ptr)
 
     def _start_animation(self) -> None:
@@ -965,11 +967,12 @@ class Window:
             "exit",
         )
 
-        panel_scale: float = (self._maze_size / self.PANEL_REFERENCE_HEIGHT)
+        panel_scale: float = (self._maze_size / self.PANEL_REFERENCE_HEIGHT)        
+        art_scale: float = panel_scale / self.ASSET_SCALE
 
-        panel_width: int = max(1, round(self._panel_width * panel_scale))
+        panel_width: int = max(1, round(self._panel_width * art_scale))
 
-        panel_height: int = max(1, round(self._panel_height * panel_scale))
+        panel_height: int = max(1, round(self._panel_height * art_scale))
 
         self._panel_scaled_image = self._create_scaled_image(
             self._panel_image,
@@ -983,10 +986,10 @@ class Window:
         )
 
         dog_width: int = max(
-            1, round(self._panel_dog_start_width * panel_scale)
+            1, round(self._panel_dog_start_width * art_scale)
         )
         dog_height: int = max(
-            1, round(self._panel_dog_start_height * panel_scale)
+            1, round(self._panel_dog_start_height * art_scale)
         )
 
         self._panel_dog_start_scaled_image = self._create_scaled_image(
@@ -1836,7 +1839,7 @@ class Window:
         )
         panel_y: int = round(self.PANEL_GRAPHIC_TOP_MARGIN * panel_scale)
         bottom_y: int = panel_y + round(
-            (self._panel_height - 283.0) * panel_scale
+            (self._panel_height / self.ASSET_SCALE - 283.0) * panel_scale
         )
         dog_area_size: int = round(self.PANEL_DOG_AREA_SIZE * panel_scale)
         return panel_scale, panel_x, panel_y, bottom_y, dog_area_size
@@ -1854,14 +1857,15 @@ class Window:
         panel_scale, panel_x, _, bottom_y, dog_area_size = (
             self._panel_layout()
         )
+        art_scale: float = panel_scale / self.ASSET_SCALE
         dog_width: int = max(
             1, round(self._panel_dog_start_width * panel_scale)
         )
         dog_height: int = max(
             1, round(self._panel_dog_start_height * panel_scale)
         )
-        dog_x: int = panel_x + max(0, (dog_area_size - dog_width) // 2)
-        dog_y: int = bottom_y + max(0, (dog_area_size - dog_height) // 2) + 60
+        dog_x: int = panel_x + max(0, (dog_area_size - dog_width) // 2) + 30
+        dog_y: int = bottom_y + max(0, (dog_area_size - dog_height) // 2) + 100
         panel_dogs: dict[str, Surface | None] = {
             "start": self._panel_dog_start_scaled_image,
             "1": self._panel_dog_1_scaled_image,
@@ -1872,12 +1876,12 @@ class Window:
         self._put_image(panel_dogs[self._animation.panel_frame], dog_x, dog_y)
 
     def _draw_panel_text(self) -> None:
-        """Write the panel texts straight on the window (after the frame)."""
+        """Draw the maze info texts inside the frame image."""
         panel_scale, panel_x, _, bottom_y, dog_area_size = (
             self._panel_layout()
         )
-        info_x: int = panel_x + dog_area_size + 25
-        info_y: int = bottom_y + 30
+        info_x: int = panel_x + dog_area_size + round(25 * panel_scale)
+        info_y: int = bottom_y + round(40 * panel_scale)
         line_step: int = max(18, round(24 * panel_scale))
 
         config: Config = self._config
@@ -1895,14 +1899,18 @@ class Window:
             f"Algorithm: {algorithm}",
             # f"Display: {display}",
         )
+
+        if self._frame is None:
+            return
+
         for index, text in enumerate(lines, start=1):
-            self._mlx.mlx_string_put(
-                self._mlx_ptr,
-                self._win_ptr,
+            draw_text(
+                self._frame,
                 info_x,
                 info_y + line_step * index,
-                self.TEXT_COLOR,
                 text if len(text) <= 21 else text[:18] + "...",
+                self.TEXT_COLOR,
+                panel_scale,
             )
 
     def _draw_animation_trail(self) -> None:

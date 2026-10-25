@@ -48,6 +48,7 @@ class Surface:
         self.bytes_per_pixel = bytes_per_pixel
         self.size_line = size_line
         self._alpha_offset: int = 3 if pixel_format == 0 else 0
+        self._little_endian: bool = pixel_format == 0
         self._opaque: bool | None = None
 
     @property
@@ -70,6 +71,18 @@ class Surface:
                 return False
         return True
 
+    def pixel_bytes(self, color: int) -> bytes:
+        """Return one opaque pixel of colour 0xRRGGBB in this image format."""
+        red = (color >> 16) & 0xFF
+        green = (color >> 8) & 0xFF
+        blue = color & 0xFF
+        alpha = 0xFF ^ self.TRANSPARENT_ALPHA
+        if self.bytes_per_pixel < 4:
+            return bytes((blue, green, red))[:self.bytes_per_pixel]
+        if self._little_endian:
+            return bytes((blue, green, red, alpha))
+        return bytes((alpha, red, green, blue))
+    
     def clear(self) -> None:
         """Fill the whole surface with zeros (opaque black)."""
         size = self.size_line * self.height
