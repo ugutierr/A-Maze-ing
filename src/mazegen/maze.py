@@ -1,3 +1,5 @@
+"""Provide data structures and operations for creating and solving mazes."""
+
 import logging
 from collections import deque
 from enum import Enum
@@ -6,7 +8,15 @@ logger = logging.getLogger(__name__)
 
 
 class Cell:
+    """Represent a single cell and its walls within a maze."""
+
     def __init__(self, row: int, column: int) -> None:
+        """Initialize a cell at the given row and column.
+
+        Args:
+            row: Zero-based row index of the cell.
+            column: Zero-based column index of the cell.
+        """
         self.row = row
         self.column = column
         self.north = True
@@ -17,31 +27,31 @@ class Cell:
         self.logo42 = False
 
     def get_bit(self) -> int:
+        """Return the bitmask representing the cell's four walls.
+
+        The bits are ordered as north, east, south, and west, with
+        weights 1, 2, 4, and 8 respectively.
+        """
         return self.north * 1 + self.east * 2 + self.south * 4 + self.west * 8
 
     def degree(self) -> int:
+        """Return the number of open passages connected to the cell."""
         bit = self.get_bit()
         return 4 - sum((bit >> i) & 1 for i in range(4))
 
 
 class Direction(Enum):
+    """Represent the four cardinal directions used by the maze."""
+
     NORTH = "N"
     EAST = "E"
     SOUTH = "S"
     WEST = "W"
 
 
-class WallRemovalEvent:
-    def __init__(
-        self, c1: Cell, w1: Direction, c2: Cell, w2: Direction
-    ) -> None:
-        self.cell1 = (c1.column, c1.row)
-        self.cell2 = (c2.column, c2.row)
-        self.wall1 = w1
-        self.wall2 = w2
-
-
 class Maze:
+    """Represent a rectangular maze and its grid of cells."""
+
     def __init__(
         self,
         width: int,
@@ -49,6 +59,14 @@ class Maze:
         entry: tuple[int, int],
         exit: tuple[int, int],
     ) -> None:
+        """Initialize a maze with the given dimensions and endpoints.
+
+        Args:
+            width: Number of columns in the maze.
+            height: Number of rows in the maze.
+            entry: Zero-based (x, y) coordinates of the maze entrance.
+            exit: Zero-based (x, y) coordinates of the maze exit.
+        """
         self.width = width
         self.height = height
         self.entry = entry
@@ -59,9 +77,14 @@ class Maze:
         ]
         self.entry_cell = self.grid[self.entry[1]][self.entry[0]]
         self.exit_cell = self.grid[self.exit[1]][self.exit[0]]
-        self.history: list[WallRemovalEvent] = []
 
     def get_bitmap(self) -> str:
+        """Return the maze as a hexadecimal wall bitmap.
+
+        Each cell is represented by one hexadecimal digit whose four
+        least significant bits encode its north, east, south, and west
+        walls.
+        """
         return "\n".join(
             [
                 "".join([format(cell.get_bit(), "x") for cell in row])
@@ -70,6 +93,16 @@ class Maze:
         )
 
     def shortest_path(self) -> str:
+        """Return the shortest path from the entry cell to the exit cell.
+
+        The path is calculated using breadth-first search and returned
+        as a string of direction characters: ``N``, ``E``, ``S``, and
+        ``W``. Cell visitation state is reset before returning.
+
+        Returns:
+            A string containing the directions of the shortest path, or
+            an empty string if the exit cannot be reached.
+        """
         parent: dict[Cell, tuple[Cell, int]] = {}
         self.entry_cell.visited = True
 
@@ -100,26 +133,36 @@ class Maze:
         return "".join(reversed(path))
 
     def north_cell(self, cell: Cell) -> Cell | None:
+        """Return the cell immediately north of the given cell."""
         if cell.row == 0:
             return None
         return self.grid[cell.row - 1][cell.column]
 
     def south_cell(self, cell: Cell) -> Cell | None:
+        """Return the cell immediately south of the given cell."""
         if cell.row == self.height - 1:
             return None
         return self.grid[cell.row + 1][cell.column]
 
     def west_cell(self, cell: Cell) -> Cell | None:
+        """Return the cell immediately west of the given cell."""
         if cell.column == 0:
             return None
         return self.grid[cell.row][cell.column - 1]
 
     def east_cell(self, cell: Cell) -> Cell | None:
+        """Return the cell immediately east of the given cell."""
         if cell.column == self.width - 1:
             return None
         return self.grid[cell.row][cell.column + 1]
 
     def neighbors(self, cell: Cell) -> list[Cell | None]:
+        """Return the four neighboring cells in cardinal order.
+
+        The returned list is ordered north, east, south, and west.
+        A value is ``None`` when the cell lies on the corresponding
+        maze boundary.
+        """
         return [
             self.north_cell(cell),
             self.east_cell(cell),
@@ -128,34 +171,30 @@ class Maze:
         ]
 
     def remove_wall(self, cell1: Cell, cell2: Cell) -> None:
+        """Remove the wall separating two neighboring cells.
+
+        Both cells are updated so that the shared wall is removed from
+        each side.
+
+        Args:
+            cell1: First cell involved in the wall removal.
+            cell2: Second cell involved in the wall removal.
+
+        Raises:
+            ValueError: If the two cells are not neighboring cells.
+        """
         if cell2 == self.north_cell(cell1):
             cell1.north = False
             cell2.south = False
-            self.history.append(
-                WallRemovalEvent(
-                    cell1, Direction.NORTH, cell2, Direction.SOUTH
-                )
-            )
         elif cell2 == self.east_cell(cell1):
             cell1.east = False
             cell2.west = False
-            self.history.append(
-                WallRemovalEvent(cell1, Direction.EAST, cell2, Direction.WEST)
-            )
         elif cell2 == self.south_cell(cell1):
             cell1.south = False
             cell2.north = False
-            self.history.append(
-                WallRemovalEvent(
-                    cell1, Direction.SOUTH, cell2, Direction.NORTH
-                )
-            )
         elif cell2 == self.west_cell(cell1):
             cell1.west = False
             cell2.east = False
-            self.history.append(
-                WallRemovalEvent(cell1, Direction.WEST, cell2, Direction.EAST)
-            )
         else:
             raise ValueError(
                 "Cannot remove walls between non neighboring cells"

@@ -1011,3 +1011,14 @@ Traceback (most recent call last):
         mazegen,
     )
 TypeError: Window.__init__() missing 1 required positional argument: 'config'
+2026-11-01 12:10:29,029 | ERROR: Unrecognised configuration variables: display_mode | a_maze_ing.py:90
+Traceback (most recent call last):
+  File "/home/ugutierr/Desktop/M2/A-Maze-ing/a_maze_ing.py", line 83, in main
+    config = get_config(config_file)
+  File "/home/ugutierr/Desktop/M2/A-Maze-ing/src/config.py", line 166, in get_config
+    config_dic = load_config(config_file, required_keys, optional_keys)
+  File "/home/ugutierr/Desktop/M2/A-Maze-ing/src/config.py", line 143, in load_config
+    raise ConfigError(
+    ...<2 lines>...
+    )
+config.ConfigError: Unrecognised configuration variables: display_mode

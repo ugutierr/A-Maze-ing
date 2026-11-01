@@ -1,3 +1,5 @@
+"""Provide maze generation algorithms and their configuration types."""
+
 import random
 from enum import Enum
 
@@ -5,20 +7,46 @@ from mazegen.maze import Cell, Maze
 
 
 class AlgorithmType(str, Enum):
+    """Represent the maze generation algorithms supported."""
+
     DFS = "DFS"
     PRIM = "PRIM"
     PACMAN = "PACMAN"
 
 
 class MazeGenerator:
+    """Generate mazes using configurable generation algorithms."""
+
     def __init__(
         self, seed: None | str, perfect: bool, algorithm: AlgorithmType
     ) -> None:
+        """Initialize a maze generator.
+
+        Args:
+            seed: Optional seed used to initialize the random number
+                generator.
+            perfect: Whether the generated maze must be a perfect maze.
+            algorithm: Algorithm to use for maze generation.
+        """
         self.seed = seed
         self.perfect = perfect
         self.algorithm = algorithm
 
     def generate(self, maze: Maze) -> None:
+        """Generate a maze using the configured algorithm.
+
+        The random number generator is initialized with the configured
+        seed before generation starts. The selected algorithm must be
+        compatible with the requested maze type.
+
+        Args:
+            maze: Maze instance to generate.
+
+        Raises:
+            ValueError: If the configured algorithm is incompatible with
+                the requested maze type or if the maze is too small for
+                the required 42 pattern.
+        """
         random.seed(self.seed)
         self._gen_42logo(maze)
         match (self.perfect, self.algorithm):
@@ -35,6 +63,18 @@ class MazeGenerator:
                 )
 
     def _gen_42logo(self, maze: Maze) -> None:
+        """Mark the cells occupied by the centered 42 pattern.
+
+        The pattern is centered in the maze and marked using the
+        ``logo42`` attribute of each affected cell. The center cell
+        itself is excluded from the pattern.
+
+        Args:
+            maze: Maze in which the 42 pattern is placed.
+
+        Raises:
+            ValueError: If the maze is too small to contain the pattern.
+        """
         pattern: tuple[str, ...] = (
             "#...###",
             "#.....#",
@@ -76,6 +116,11 @@ class MazeGenerator:
                 maze.grid[row][column].logo42 = True
 
     def _dfs_generator(self, maze: Maze) -> None:
+        """Generate a perfect maze using depth-first search.
+
+        A randomized depth-first search is used to remove walls while
+        avoiding cells marked as part of the 42 pattern.
+        """
         start = random.choice(random.choice(maze.grid))
         start.visited = True
         stack = [start]
@@ -97,6 +142,12 @@ class MazeGenerator:
                 cell.visited = False
 
     def _prim_generator(self, maze: Maze) -> None:
+        """Generate a perfect maze using a randomized Prim's algorithm.
+
+        The algorithm maintains a collection of candidate connections
+        between visited and unvisited cells and randomly selects from
+        those connections while avoiding the 42 pattern.
+        """
         start = random.choice(random.choice(maze.grid))
         start.visited = True
         stack = [
@@ -123,6 +174,13 @@ class MazeGenerator:
                 cell.visited = False
 
     def _pacman_generator(self, maze: Maze) -> None:
+        """Generate a non-perfect maze with additional open corridors.
+
+        The maze is first generated using depth-first search. Mandatory
+        corridors are then opened around the maze perimeter and center.
+        Finally, selected dead ends are opened to produce a less
+        constrained, non-perfect maze while preserving the 42 pattern.
+        """
         self._dfs_generator(maze)
         x = maze.width // 2
         y = maze.height // 2

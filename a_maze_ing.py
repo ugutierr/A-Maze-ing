@@ -1,3 +1,5 @@
+"""Provide the main entry point for the A-maze-ing application."""
+
 import logging
 import sys
 from pathlib import Path
@@ -16,7 +18,10 @@ Path("logs").mkdir(exist_ok=True)
 
 
 class NoTracebackFormatter(logging.Formatter):
+    """Format log exceptions without displaying their tracebacks."""
+
     def formatException(self, exc_info: Any) -> str:
+        """Return an empty string instead of a formatted exception."""
         return ""
 
 
@@ -44,6 +49,7 @@ logger.addHandler(file_handler)
 
 
 def gen_output_file(name: str, maze: Maze) -> None:
+    """Write the generated maze and its solution data to a file."""
     with open(name, "w") as f:
         msg = (
             maze.get_bitmap()
@@ -63,6 +69,7 @@ def gen_output_file(name: str, maze: Maze) -> None:
 
 
 def main() -> int:
+    """Run the A-maze-ing application."""
     if len(sys.argv) != 2:
         logger.info(
             f"Invalid input: {len(sys.argv)} arguments given, 2 expected."

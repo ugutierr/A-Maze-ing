@@ -1,4 +1,5 @@
-from enum import Enum
+"""Provide configuration models and utilities."""
+
 from pathlib import Path
 from typing import Annotated, Any, Self
 
@@ -9,17 +10,15 @@ from mazegen import AlgorithmType
 
 
 class ConfigError(RuntimeError):
-    pass
-
-
-class DisplayModeType(str, Enum):
-    pass
+    """Raised when a configuration file cannot be loaded or validated."""
 
 
 NonNegativeInt = Annotated[int, Field(ge=0)]
 
 
 class Config(BaseModel):
+    """Represent and validate the application configuration."""
+
     width: Annotated[int, Field(ge=11, le=1000)]
     height: Annotated[int, Field(ge=9, le=1000)]
     entry: tuple[NonNegativeInt, NonNegativeInt]
@@ -28,11 +27,11 @@ class Config(BaseModel):
     perfect: bool
     seed: None | str = None
     algorithm: AlgorithmType | None = None
-    display_mode: DisplayModeType | None = None
 
     @field_validator("entry", "exit", mode="before")
     @classmethod
     def parse_point(cls, value: Any) -> Any:
+        """Parse a point from a comma-separated string."""
         if isinstance(value, str):
             return tuple(map(int, value.split(",")))
         return value
@@ -40,6 +39,7 @@ class Config(BaseModel):
     @field_validator("output_file", mode="before")
     @classmethod
     def parse_output_file(cls, value: Any) -> Any:
+        """Convert an empty output file value to None."""
         if value == "":
             return None
         return value
@@ -47,13 +47,15 @@ class Config(BaseModel):
     @field_validator("seed", mode="before")
     @classmethod
     def parse_seed(cls, value: Any) -> Any:
+        """Convert an empty seed value to None."""
         if isinstance(value, str) and value == "":
             return None
         return value
 
-    @field_validator("algorithm", "display_mode", mode="before")
+    @field_validator("algorithm", mode="before")
     @classmethod
     def parse_word(cls, value: Any) -> Any:
+        """Normalize configuration words to uppercase."""
         if isinstance(value, str):
             if value == "":
                 return None
@@ -62,6 +64,7 @@ class Config(BaseModel):
 
     @model_validator(mode="after")
     def check_algorithm(self) -> Self:
+        """Validate and set the maze generation algorithm."""
         if self.algorithm is None:
             self.algorithm = (
                 AlgorithmType.DFS if self.perfect else AlgorithmType.PACMAN
@@ -79,6 +82,7 @@ class Config(BaseModel):
 
     @model_validator(mode="after")
     def check_endpoints(self) -> Self:
+        """Validate the maze entry and exit coordinates."""
         if self.entry == self.exit:
             raise ValueError("Entry and exit cannot be the same cell")
         for cell in (self.entry, self.exit):
@@ -96,6 +100,7 @@ class Config(BaseModel):
 def load_config(
     config_file: str, required_keys: set[str], optional_keys: set[str]
 ) -> dict[str, str | None]:
+    """Load and validate configuration values from a dotenv file."""
     path = Path(config_file)
 
     if not path.exists():
@@ -144,6 +149,7 @@ def load_config(
 
 
 def get_config(config_file: str) -> Config:
+    """Load and return the validated application configuration."""
     required_keys = {
         "width",
         "height",
@@ -156,7 +162,6 @@ def get_config(config_file: str) -> Config:
     optional_keys = {
         "seed",
         "algorithm",
-        "display_mode",
     }
     config_dic = load_config(config_file, required_keys, optional_keys)
     config = Config.model_validate(config_dic)
