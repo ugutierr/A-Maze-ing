@@ -28,11 +28,11 @@ FLAKE8_FLAGS = --exclude=.venv
 
 
 
-install: build
+install:
 	@uv sync
 	@echo "Installation complete."
 
-run: install
+run: install 
 	@uv run python3 a_maze_ing.py $(CONFIG)
 
 build:
