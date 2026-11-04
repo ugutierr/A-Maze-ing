@@ -121,7 +121,9 @@ class MazeGenerator:
         A randomized depth-first search is used to remove walls while
         avoiding cells marked as part of the 42 pattern.
         """
-        start = random.choice(random.choice(maze.grid))
+        start = random.choice(
+            [c for row in maze.grid for c in row if not c.logo42]
+        )
         start.visited = True
         stack = [start]
         while stack:
@@ -148,7 +150,9 @@ class MazeGenerator:
         between visited and unvisited cells and randomly selects from
         those connections while avoiding the 42 pattern.
         """
-        start = random.choice(random.choice(maze.grid))
+        start = random.choice(
+            [c for row in maze.grid for c in row if not c.logo42]
+        )
         start.visited = True
         stack = [
             (cell, start)
