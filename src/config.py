@@ -88,9 +88,7 @@ class Config(BaseModel):
         for cell in (self.entry, self.exit):
             if cell[0] >= self.width or cell[1] >= self.height:
                 raise ValueError(
-                    "Entry"
-                    if cell == self.entry
-                    else "Exit"
+                    f"{'Entry' if cell == self.entry else 'Exit'}"
                     + " must have x and y coordinates"
                     + " less than width and height respectively"
                 )
