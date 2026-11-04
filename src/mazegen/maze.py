@@ -119,6 +119,9 @@ class Maze:
                 queue.append(c)
         if not self.exit_cell.visited:
             logger.debug("Shortest path not found")
+            for row in self.grid:
+                for cell in row:
+                    cell.visited = False
             return ""
         current = self.exit_cell
         path = []
