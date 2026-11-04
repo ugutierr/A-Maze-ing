@@ -15,7 +15,6 @@ dependencies = [
 app = [
     "mlx",
     "pydantic>=2.13.5",
-    "python-dotenv>=1.2.3",
 ]
 dev = [
     "flake8>=7.3.0",

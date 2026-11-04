@@ -3,7 +3,6 @@
 from pathlib import Path
 from typing import Annotated, Any, Self
 
-from dotenv import dotenv_values
 from pydantic import BaseModel, Field, field_validator, model_validator
 
 from mazegen import AlgorithmType
@@ -19,8 +18,8 @@ NonNegativeInt = Annotated[int, Field(ge=0)]
 class Config(BaseModel):
     """Represent and validate the application configuration."""
 
-    width: Annotated[int, Field(ge=11, le=1000)]
-    height: Annotated[int, Field(ge=9, le=1000)]
+    width: Annotated[int, Field(ge=1, le=200)]
+    height: Annotated[int, Field(ge=1, le=200)]
     entry: tuple[NonNegativeInt, NonNegativeInt]
     exit: tuple[NonNegativeInt, NonNegativeInt]
     output_file: str
@@ -95,10 +94,41 @@ class Config(BaseModel):
         return self
 
 
-def load_config(
-    config_file: str, required_keys: set[str], optional_keys: set[str]
-) -> dict[str, str | None]:
-    """Load and validate configuration values from a dotenv file."""
+def parse_file(file_path: Path) -> dict[str, str]:
+    ret_dict: dict[str, str] = {}
+    with open(file_path, "r", encoding="utf-8") as file:
+        for i, line in enumerate(file):
+            clean_line = line.split("#")[0]
+            if clean_line.strip() == "":
+                continue
+            key_value = clean_line.split("=")
+            if len(key_value) != 2:
+                raise ValueError(
+                    f"Expected 'KEY = VALUE #COMMENT' structure in line {i}"
+                )
+            key = key_value[0].strip()
+            value = key_value[1].strip()
+            if key in ret_dict.keys():
+                raise ValueError(f"Duplicated key: {key!r}")
+            ret_dict[key] = value
+    return ret_dict
+
+
+def load_config(config_file: str) -> dict[str, str]:
+    """Load and validate configuration values from a configuration file."""
+    required_keys = {
+        "width",
+        "height",
+        "entry",
+        "exit",
+        "output_file",
+        "perfect",
+    }
+
+    optional_keys = {
+        "seed",
+        "algorithm",
+    }
     path = Path(config_file)
 
     if not path.exists():
@@ -108,8 +138,10 @@ def load_config(
         raise ConfigError(f"Configuration path is not a file: {path}")
 
     try:
-        config = dotenv_values(path)
+        config = parse_file(path)
 
+    except ValueError as e:
+        raise ConfigError(str(e)) from e
     except PermissionError as e:
         raise ConfigError(
             f"Cannot read configuration file (permission denied): {path}"
@@ -148,19 +180,6 @@ def load_config(
 
 def get_config(config_file: str) -> Config:
     """Load and return the validated application configuration."""
-    required_keys = {
-        "width",
-        "height",
-        "entry",
-        "exit",
-        "output_file",
-        "perfect",
-    }
-
-    optional_keys = {
-        "seed",
-        "algorithm",
-    }
-    config_dic = load_config(config_file, required_keys, optional_keys)
+    config_dic = load_config(config_file)
     config = Config.model_validate(config_dic)
     return config
