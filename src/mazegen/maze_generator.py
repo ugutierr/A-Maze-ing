@@ -104,7 +104,7 @@ class MazeGenerator:
             or maze.width < 9
         ):
             raise ValueError(
-                "Warning: maze is too small to diaplay the 42 pattern."
+                "Warning: maze is too small to display the 42 pattern."
             )
 
         for pattern_row, line in enumerate(pattern):
