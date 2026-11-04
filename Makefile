@@ -76,9 +76,6 @@ lint-strict: install flake8
 tree: 
 	@tree -a -I '.git|.venv'
 
-kill:
-	@kill "$$(ps aux | grep "a_maze_ing" | awk 'NF {print $$2; exit}')"
-
 clean:
 	@echo "Cleaning project..."
 	@find . -type d \( -name "__pycache__" \
@@ -90,4 +87,4 @@ clean:
 
 
 
-.PHONY: install run debug lint lint-strict run clean flake8 tree kill
+.PHONY: install run build test analyze debug flake8 lint lint-strict clean tree
