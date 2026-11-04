@@ -201,13 +201,13 @@ wheels = [
 name = "mazegen"
 version = "0.1.0"
 source = { editable = "." }
-dependencies = [
+
+[package.dev-dependencies]
+app = [
     { name = "mlx" },
     { name = "pydantic" },
     { name = "python-dotenv" },
 ]
-
-[package.dev-dependencies]
 dev = [
     { name = "flake8" },
     { name = "mypy" },
@@ -215,13 +215,13 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [
+
+[package.metadata.requires-dev]
+app = [
     { name = "mlx", path = "lib/mlx-2.2-py3-none-any.whl" },
     { name = "pydantic", specifier = ">=2.13.5" },
     { name = "python-dotenv", specifier = ">=1.2.3" },
 ]
-
-[package.metadata.requires-dev]
 dev = [
     { name = "flake8", specifier = ">=7.3.0" },
     { name = "mypy", specifier = ">=2.3.1" },
