@@ -114,7 +114,7 @@ def main() -> int:
         logger.exception(f"Could not find {config.output_file}")
         return 1
     except IsADirectoryError:
-        logger.exception(config.output_file, "is a directory")
+        logger.exception("{config.output_file} is a directory")
         return 1
     except OSError:
         logger.exception("Error openning file")
