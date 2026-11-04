@@ -48,7 +48,10 @@ class MazeGenerator:
                 the required 42 pattern.
         """
         random.seed(self.seed)
-        self._gen_42logo(maze)
+        try:
+            self._gen_42logo(maze)
+        except ValueError as e:
+            maze.warnings.append(str(e))
         match (self.perfect, self.algorithm):
             case (True, AlgorithmType.DFS):
                 self._dfs_generator(maze)
@@ -97,9 +100,11 @@ class MazeGenerator:
             or start_y < 0
             or start_x + pattern_width > maze.width
             or start_y + pattern_height > maze.height
+            or maze.height < 7
+            or maze.width < 9
         ):
             raise ValueError(
-                "Error: maze is too small to diaplay the 42 pattern."
+                "Warning: maze is too small to diaplay the 42 pattern."
             )
 
         for pattern_row, line in enumerate(pattern):
