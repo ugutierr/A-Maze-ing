@@ -82,9 +82,10 @@ def main() -> int:
     try:
         config = get_config(config_file)
     except ValidationError as e:
-        logger.exception("Invalid configuration:")
+        error_msg = "Invalid configuration:"
         for error in e.errors():
-            logger.exception(f"  {error['msg']}")
+            error_msg += f"\n\tat {error['loc'][0]}: \t{error['msg']}"
+        logger.exception(error_msg)
         return 1
     except ConfigError as e:
         logger.exception(e)
