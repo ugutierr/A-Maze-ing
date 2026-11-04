@@ -37,7 +37,7 @@ run: install
 
 build:
 	@echo "Building project..."
-	@uv build
+	@uv build --wheel --out-dir .
 	@echo "Build complete."
 
 
@@ -86,7 +86,6 @@ clean:
 		-o -name ".pytest_cache" \) \
   -not -path "./.venv/*" -prune -exec rm -rf {} +
 	@rm -f maze.txt
-	@rm -rf dist/
 
 
 
