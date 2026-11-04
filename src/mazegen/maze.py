@@ -2,7 +2,6 @@
 
 import logging
 from collections import deque
-from enum import Enum
 
 logger = logging.getLogger(__name__)
 
@@ -38,15 +37,6 @@ class Cell:
         """Return the number of open passages connected to the cell."""
         bit = self.get_bit()
         return 4 - sum((bit >> i) & 1 for i in range(4))
-
-
-class Direction(Enum):
-    """Represent the four cardinal directions used by the maze."""
-
-    NORTH = "N"
-    EAST = "E"
-    SOUTH = "S"
-    WEST = "W"
 
 
 class Maze:
